@@ -5,9 +5,13 @@ class Dice implements Item {
     image : string;
     type: DICE;
 
-    getSize() {
+    getSize():number {
         return this.type;
     }
+
+	roll():number {
+		return Math.floor(Math.random() * (this.type - 1) + 1);
+    };
 }
 
 export default Dice;

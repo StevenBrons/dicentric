@@ -16,7 +16,7 @@ class GameState {
 	equipDice(eq: Equipment, d:DICE):void {
 		//check if equipment in inventory 
 		if(!this.inventory.includes(eq)) {
-			throw new console.error("trying to equip equipment which is not present in inventory");
+			throw new Error("trying to equip equipment which is not present in inventory");
 		}
 
 		//remove equipment from inventory
@@ -41,12 +41,6 @@ class GameState {
 	move(node : MapNode):void {
 		this.mapState.setLocation(node);
 	}
-
-	roll(d: DICE):number {
-		return Math.floor(Math.random() * (d - 1) + 1);
-    };
-
-	addToInventory(item: Item):void {
-		this.inventory.push(item);
-	}
 }
+
+export default GameState;
