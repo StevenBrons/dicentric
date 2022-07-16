@@ -5,11 +5,13 @@ import Equipment from "./items/equipment";
 import GameEvent from "./events/gameEvent";
 import MapNode from "./mapNode";
 import Level from "./level";
+import Dice from "./items/dice";
 
 
 class GameState {
 	mapState: MapState;
 	inventory: Item[];
+	inventoryStartLevel: Item[];
 	level: number;
 	lives: number;
 	equipment: EquipState;
@@ -18,6 +20,7 @@ class GameState {
 	constructor(level: Level) {
 		this.mapState = level.map;
 		this.inventory = level.startInventory; 
+		this.inventoryStartLevel = level.startInventory;
 		this.level = level.number;
 		this.lives = 20; //start levens??
 		this.equipment = new EquipState();
@@ -71,7 +74,17 @@ class GameState {
 	updateLevel(level: Level) : void {
 		this.mapState = level.map;
 		this.level = level.number;
-		//todo nog niet af
+		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(level.startInventory);
+		this.inventoryStartLevel = this.inventory;
+		this.lives = 20; //of oude hoeveelheid levens???
+		this.eventState = level.map.startNode.event;
+	}
+
+	resetLevel() : void{
+		this.mapState.resetMap();
+		this.inventory = this.inventoryStartLevel;
+		this.lives = 20;
+		this.eventState = this.mapState.startNode.event;
 	}
 }
 

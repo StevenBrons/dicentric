@@ -27,6 +27,13 @@ class ShopEvent extends GameEvent {
     getSpendable():number {
         return this.rollResult;
     }
+
+    resetEvent(): void {
+        super.resetEvent();
+        for(let i = 0; i < this.stock.length; i++) {
+            this.stock[i].sold = false;
+        }
+    }
 }
 
 export default ShopEvent;

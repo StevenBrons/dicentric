@@ -51,6 +51,12 @@ class GameEvent {
 		this.selectedDice.splice(i, 1);
         inventory.push(d);
     }
+
+    resetEvent() : void {
+        this.selectedDice = [];
+        this.rolled = false;
+        this.rollResult = 0;
+    }
 }
 
 export default GameEvent;
