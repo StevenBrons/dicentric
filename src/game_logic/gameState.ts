@@ -24,7 +24,7 @@ class GameState {
 		this.eventState = null;
 	}
 
-	equipDice(eq: Equipment, d: DICE):void {
+	equipDice(eq: Equipment, d: DICE) : void {
 		//check if equipment in inventory 
 		if(!this.inventory.includes(eq)) {
 			throw new Error("trying to equip equipment which is not present in inventory");
@@ -45,27 +45,33 @@ class GameState {
 		this.equipment.diceEquipment.set(d,eq);
 	}
 
-	loseLives(nr: number):void {
+	loseLives(nr: number) : void {
 		this.lives = this.lives - nr;
 	}
 
-	move(node : MapNode):void {
+	move(node : MapNode) : void {
 		this.mapState.setLocation(node);
 		if(node.event != null) {
 			this.setEvent(node.event);
 		}
 	}
 
-	getEvent(): GameEvent | null{
+	getEvent() : GameEvent | null{
 		return this.eventState;
 	}
 
-	setEvent(e : GameEvent): void {
+	setEvent(e : GameEvent) : void {
 		this.eventState = e;
 	}
 
 	endEvent(): void {
 		this.eventState = null;
+	}
+
+	updateLevel(level: Level) : void {
+		this.mapState = level.map;
+		this.level = level.number;
+		//todo nog niet af
 	}
 }
 

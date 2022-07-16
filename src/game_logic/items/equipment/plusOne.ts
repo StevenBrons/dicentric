@@ -1,10 +1,11 @@
 import Equipment from "../equipment";
 
 class PlusOne extends Equipment {
-    explanation: string = "Adds 1 to dice roll";
+    explanation: string;
 
     constructor() {
         super();
+        this.explanation = "Adds 1 to dice roll";
     }
 
     rollWithEq(d: DICE): number {

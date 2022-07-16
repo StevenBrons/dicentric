@@ -1,11 +1,7 @@
 import Item from "./item";
 
 abstract class Equipment extends Item {
-    explanation: string;
-
-    constructor(){
-        super();
-    }
+    abstract explanation: string;
 
     abstract rollWithEq(d: DICE): number;
 }

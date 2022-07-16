@@ -7,12 +7,12 @@ class Dice extends Item {
     constructor(d: DICE) {
         super();
         switch(d) { //TODO add images
-            case DICE.d4: this.image = "";
-            case DICE.d6: this.image = "";
-            case DICE.d8: this.image = "";
-            case DICE.d10: this.image = ""; 
-            case DICE.d12: this.image = "";
-            case DICE.d20: this.image = "";
+            case DICE.d4: this.image = ""; break; 
+            case DICE.d6: this.image = ""; break;
+            case DICE.d8: this.image = ""; break;
+            case DICE.d10: this.image = ""; break;
+            case DICE.d12: this.image = ""; break;
+            case DICE.d20: this.image = ""; break;
         } 
         this.type = d;
     }
@@ -26,7 +26,7 @@ class Dice extends Item {
     }
 
 	roll(eq: Equipment | undefined):number {
-        if(eq != undefined) {
+        if(eq !== undefined) {
             //alter roll according to equipment
             return eq.rollWithEq(this.type);
         }

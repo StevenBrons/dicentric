@@ -1,4 +1,3 @@
-import Dice from "./items/dice";
 import Equipment from "./items/equipment";
 
 class EquipState {

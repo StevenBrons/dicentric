@@ -1,4 +1,3 @@
-import Dice from "../items/dice";
 import GameEvent from "./gameEvent";
 import Item from "../items/item";
 

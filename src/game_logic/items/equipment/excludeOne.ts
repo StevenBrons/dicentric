@@ -1,10 +1,11 @@
 import Equipment from "../equipment";
 
 class ExcludeOne extends Equipment {
-    explanation: string = "Prevents the die from rolling 1";
+    explanation: string;        
 
     constructor() {
         super();
+        this.explanation = "Prevents the die from rolling 1";
     }
 
     rollWithEq(d: DICE): number {
