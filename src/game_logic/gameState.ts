@@ -5,6 +5,7 @@ import Equipment from "./items/equipment";
 import GameEvent from "./events/gameEvent";
 import MapNode from "./mapNode";
 import Level from "./level";
+import { DICE } from "./items/dice";
 
 
 class GameState {
