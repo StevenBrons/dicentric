@@ -1,6 +1,7 @@
 import Dice from "../items/dice";
 import EquipState from "../equipState";
 import Item from "../items/item";
+import GameState from "../gameState";
 
 abstract class GameEvent {
     abstract name : string;
@@ -20,7 +21,7 @@ abstract class GameEvent {
             this.rollResult.push(0);
         }
     }
-
+    //TODO IN SHOPEVENT ETC OVERWRITTEN EN SUPER AANROEPEN
     rollDice(eqs: EquipState, option: number) {
         if(this.rolled) {
             //already rolled
@@ -35,21 +36,22 @@ abstract class GameEvent {
 		this.selectedDice[option].dice = [];
     }
 
-    selectDice(d: Dice, option: number, inventory: Item[]) {
+    selectDice(d: Dice, option: number, gameState: GameState) {
         //is there space to select
         if(this.selectedDice[option].dice.length >= this.nrDiceSlots[option]){
             throw new Error("trying to select dice while there is no space");
         }
         //is the die available to select
-        if(!inventory.includes(d)) {
+        if(!gameState.inventory.includes(d)) {
 			throw new Error("trying to select dice which is not in inventory");
 		}
         //remove from inventory and select
-        let i = inventory.indexOf(d);
-		inventory.splice(i, 1);
+        let i = gameState.inventory.indexOf(d);
+		gameState.inventory.splice(i, 1);
         this.selectedDice[option].dice.push(d);
     }
 
+    //todo overal inventory vervangen door gamestate
     deselectDice(d: Dice, option: number, inventory: Item[]) {
         //is the dice selected?
         if(!this.selectedDice[option].dice.includes(d)) {

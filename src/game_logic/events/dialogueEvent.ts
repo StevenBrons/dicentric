@@ -7,7 +7,7 @@ class DialogueEvent extends GameEvent {
     selectedDice: { dice: Dice[]; text: string; }[];
     nrDiceSlots: number[];
     name: string;
-	options: {succes: (n: number) => boolean, rewards: Item[]}[];
+		options: {succes: (n: number) => boolean, rewards: Item[]}[];
 
     constructor(options: {text: string, slots: number, effect: {succes: (n: number) => boolean, rewards: Item[]}}[]) { //effects implementeren
         super(options.length);

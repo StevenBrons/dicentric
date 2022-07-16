@@ -58,9 +58,3 @@ function App() {
 }
 
 export default App;
-
-// {/* <ItemGroup width={4}/>
-// <br />
-// <ItemGroup width={2}/> */}
-// <Inventory items={[]}/>
-// </div>

@@ -12,10 +12,10 @@ class BattleEvent extends GameEvent {
     selectedDice: { dice: Dice[]; text: string; }[];
     nrDiceSlots: number[];
     name: string;
-	actions: ACTION[];
-	enemy: Enemy;
+		actions: ACTION[];
+		enemy: Enemy;
 
-    constructor(actions : {text : string, slots : number, effect : ACTION}[], enemy: Enemy) { 
+	constructor(actions : {text : string, slots : number, effect : ACTION}[], enemy: Enemy) { 
 		super(actions.length); 
 		this.enemy = enemy;
 		this.name = "Battle";
@@ -27,7 +27,7 @@ class BattleEvent extends GameEvent {
 			this.nrDiceSlots.push(actions[i].slots); 
 			this.actions.push(actions[i].effect);
 		}
-    }
+	}
 
 	performAction(option: number, gameState: GameState) {
 		this.rollDice(gameState.equipment, option);
