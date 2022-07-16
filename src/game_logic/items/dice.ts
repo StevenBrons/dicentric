@@ -15,15 +15,25 @@ class Dice extends Item {
 
 	constructor(d: DICE) {
 		super();
-		switch(d) { //TODO add images
-			case DICE.d4: this.image = ""; break; 
-			case DICE.d6: this.image = ""; break;
-			case DICE.d8: this.image = ""; break;
-			case DICE.d10: this.image = ""; break;
-			case DICE.d12: this.image = ""; break;
-			case DICE.d20: this.image = ""; break;
-		} 
+		this.image = Dice.getImage(d)
 		this.type = d;
+	}
+
+	static getImage(d: DICE) {
+		switch(d) {
+			case DICE.d4: 
+				return "./res/d4.png";
+			case DICE.d6: 
+				return "./res/d6.png";
+			case DICE.d8: 
+				return "./res/d8.png";
+			case DICE.d10: 
+				return "./res/d10.png";
+			case DICE.d12: 
+				return "./res/d12.png";
+			case DICE.d20: 
+				return "./res/d20.png";
+		} 
 	}
 
 	getID():number {

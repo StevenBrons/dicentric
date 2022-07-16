@@ -1,9 +1,9 @@
 
 
 .Screen {
-	background-color: red;
 	grid-row-start: topevent;
 	grid-row-end: bottomevent;
 	grid-column-start: topevent;
 	grid-column-end: bottomevent;
+	padding: 20px;
 }

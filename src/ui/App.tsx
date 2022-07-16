@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import GameEvent from "../game_logic/events/gameEvent";
 import GameState from "../game_logic/gameState";
 import level1 from "../levels/level1";
 import Inventory from "./Inventory";
@@ -8,44 +9,56 @@ import MapLayer from "./MapLayer";
 import Battle  from "./screens/Battle";
 import Dialogue from "./screens/Dialogue";
 import Equipment from "./screens/Equipment";
-import { getShop } from "./screens/Shop";
+import Shop from "./screens/Shop";
 
-function getScreen(name: string | null) {
+function getScreen(gameEvent: GameEvent | null) {
 
-  switch (name) {
-    case "shop":
-      return getShop();
-    case "battle":
+  switch (gameEvent?.name) {
+    case "Shop":
+      return <Shop />
+    case "Battle":
       return <Battle />
-    case "equipment":
+    case "Equipment":
       return <Equipment />
-    case "dialogue":
+    case "Dialogue":
       return <Dialogue />
     default:
       return null;
   }
 }
 
-const GameContext = React.createContext(new GameState(level1));
+type GameContext = [GameState, (x: GameState) => void, number];
+
+export const gameContext = React.createContext<GameContext>([new GameState(level1), () => {}, 0])
 
 function App() {
   
-  const [screen, setScreen] = useState(null);
   const [gameState, setGameState] = useState(new GameState(level1));
+  const [updateNumber, setUpdateNumber] = useState(0);
+
+  function updateGameState(gs: GameState) {
+    setGameState(gs);
+    setUpdateNumber(updateNumber + 1);
+  }
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <GameContext.Provider value={gameState}>
+      <gameContext.Provider value={[gameState, updateGameState, updateNumber]}>
         <MapLayer />
-      </ GameContext.Provider>
+        <div className="MenuLayer">
+          {getScreen(gameState.eventState)}
+          <Inventory items={gameState.inventory} />
+          <div tabIndex={1} className="RollButton" onClick={() => console.log("ere")} >
+            Roll
+          </div>
+        </div>
+      </ gameContext.Provider>
     </DndProvider>
   );
 }
 
 export default App;
 
-// <div className="MenuLayer">
-// {getScreen(screen)}
 // {/* <ItemGroup width={4}/>
 // <br />
 // <ItemGroup width={2}/> */}

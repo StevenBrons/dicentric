@@ -1,24 +1,16 @@
 import { FC } from "react";
+import Screen from "./Screen";
 import "./Shop.css";
 
-const ShopTop : FC = () => {
-	return <div className="ShopTop">
+const Shop : FC = () => {
+	return <Screen name="Shop">
 		<h1>
-			test
+			Shop
 		</h1>
-	</div>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas efficitur ullamcorper tincidunt. Morbi vel sem sed quam iaculis pulvinar sit amet id velit.
+		</p>
+	</Screen>
 }
 
-const ShopBottom : FC = () => {
-	return <div className="ShopBottom">
-		<h1>
-			test
-		</h1>
-	</div>
-}
-
-const getShop = () => {
-	return [<ShopTop />, <ShopBottom />]
-}
-
-export { getShop };
+export default Shop;

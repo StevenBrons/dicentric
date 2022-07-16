@@ -1,6 +1,13 @@
 
 .ItemGroup {
-	border: 5px solid black;
+	height: 100%;
 	display: inline-block;
+}
+
+.ItemGroup .inner {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-around;
 }
 

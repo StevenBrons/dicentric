@@ -1,18 +1,6 @@
 
 
 
-.ShopTop {
+.Shop {
 	background-color: blue;
-	grid-row-start: topevent;
-	grid-row-end: topevent;
-	grid-column-start: topevent;
-	grid-column-end: topevent;
-}
-
-.ShopBottom {
-	background-color: orange;
-	grid-row-start: bottomevent;
-	grid-row-end: bottomevent;
-	grid-column-start: bottomevent;
-	grid-column-end: bottomevent;
 }

@@ -10,7 +10,6 @@ const ItemGroup: React.FC<{ width: number, height?: number}> = ({ width, height 
 	const [{ isOver }, dropRef] = useDrop({
 		accept: "item",
 		drop: (item) => {
-			console.log(item);
 			setItems([...items, item as number])
 		},
 		collect: (monitor) => ({
@@ -24,16 +23,19 @@ const ItemGroup: React.FC<{ width: number, height?: number}> = ({ width, height 
 		slots[y] = [];
 		for (let x: number = 0; x < width; x++) {
 			if (c < items.length) {
-				slots[y][x] = <ItemSlot key={y * width + x} item={items[c]}/>;
+				slots[y][x] = <ItemSlot key={y * width + x} item={null}/>;
 			} else {
 				slots[y][x] = <ItemSlot key={y * width + x} item={null}/>;
 			}
 			c++;
 		}
+		slots[y][width] = <br />
 	}
 
-	return <div className={`ItemGroup`} ref={dropRef}>
-		{slots}
+	return <div className="ItemGroup" ref={dropRef}>
+		<div className="inner">
+			{slots}
+		</div>
 	</div>
 
 }

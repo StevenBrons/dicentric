@@ -21,4 +21,10 @@
 	translate: -25px -25px;
 	border: 8px solid #e95703;
 	border-radius: 40px;
+	z-index: 20;
+}
+
+.Node.CanTravel {
+	border-radius: 50%;
+	box-shadow: 0px 0px 25px 10px rgb(182, 255, 255);
 }

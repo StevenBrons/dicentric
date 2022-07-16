@@ -1,8 +1,9 @@
 import { useState, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import Item from "../game_logic/items/item";
 import "./ItemSlot.css";
 
-const ItemSlot: FC<{ item: number | null }> = ({ item }) => {
+const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean }> = ({ item, placeHolder, hasMultiple = false }) => {
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: "item",
@@ -14,14 +15,13 @@ const ItemSlot: FC<{ item: number | null }> = ({ item }) => {
 
 	if (!item) {
 		return <div className="ItemSlot">
-			<div className="Item" ref={dragRef}/>
+			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}}/>
 			{isDragging && "hoooi"}
 		</div>
 	}
 
-	return <div className="ItemSlot">
-		<div className="Item" style={{ backgroundImage: "url('./res/dice4.png')"}} ref={dragRef}/>
-		{isDragging && "hoooi"}
+	return <div className="ItemSlot Selectable">
+		<div className="Item" style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}} ref={dragRef}/>
 	</div>
 
 }
