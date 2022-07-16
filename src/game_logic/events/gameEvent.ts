@@ -2,7 +2,8 @@ import Dice from "../items/dice";
 import EquipState from "../equipState";
 import Item from "../items/item";
 
-class GameEvent {
+abstract class GameEvent {
+    abstract name : string;
     selectedDice : Dice[];
     nrDiceSlots : number;
     rollResult: number;

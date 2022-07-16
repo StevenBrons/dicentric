@@ -2,10 +2,12 @@ import GameEvent from "./gameEvent";
 import Item from "../items/item";
 
 class ShopEvent extends GameEvent {
+    name: string;
     stock : {item: Item, price: number, sold: boolean}[];
 
     constructor(stock: {item: Item, price: number, sold: boolean}[]) {
         super(); 
+        this.name = "Shop";
         this.nrDiceSlots = 3; //aanpassen?
         this.stock = stock;
     }

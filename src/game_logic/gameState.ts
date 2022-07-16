@@ -24,7 +24,7 @@ class GameState {
 		this.level = level.number;
 		this.lives = 20; //start levens??
 		this.equipment = new EquipState();
-		this.eventState = null;
+		this.eventState = level.map.startNode.event;
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {
