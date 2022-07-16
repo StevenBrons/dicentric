@@ -37,19 +37,28 @@ class GameState {
 		let i = this.inventory.indexOf(eq);
 		this.inventory.splice(i, 1);
 	
-		//check if there already was an equipment
-		let oldeq = this.equipment.getDiceEquipment(d);
-		if(oldeq != null) {
-			//put old equipment back in inventory 
-			this.inventory.push(oldeq);
-		}
+		// you do not get equipment back 
+
+		// //check if there already was an equipment
+		// let oldeq = this.equipment.getDiceEquipment(d);
+		// if(oldeq != null) {
+		// 	//put old equipment back in inventory 
+		// 	this.inventory.push(oldeq);
+		// }
 
 		//equip new equipment
 		this.equipment.diceEquipment.set(d,eq);
 	}
 
 	loseLives(nr: number) : void {
-		this.lives = this.lives - nr;
+		this.lives = Math.max(this.lives - nr, 0);
+		if(this.lives === 0) {
+			this.resetLevel();
+		}
+	}
+
+	healLives(nr: number) : void {
+		this.lives = this.lives + nr;
 	}
 
 	move(node : MapNode) : void {
@@ -67,8 +76,12 @@ class GameState {
 		this.eventState = e;
 	}
 
-	endEvent(): void {
+	endEvent() : void {
 		this.eventState = null;
+	}
+
+	addToInventory(items: Item[]) : void {
+		this.inventory = this.inventory.concat(items);
 	}
 
 	updateLevel(level: Level) : void {

@@ -1,40 +1,34 @@
 import GameEvent from "./gameEvent";
 import Item from "../items/item";
+import Dice from "../items/dice";
+import GameState from "../gameState";
 
 class ShopEvent extends GameEvent {
+    selectedDice: { dice: Dice[]; text: string; }[];
+    nrDiceSlots: number[];
     name: string;
     stock : {item: Item, price: number, sold: boolean}[];
 
     constructor(stock: {item: Item, price: number, sold: boolean}[]) {
-        super(); 
+        super(1); 
+        this.selectedDice = [{dice: [], text: "select dice to get an amount to spend"}];
         this.name = "Shop";
-        this.nrDiceSlots = 3; //aanpassen?
+        this.nrDiceSlots = [3]; //aanpassen?
         this.stock = stock;
     }
 
-    buy(index: number, inventory: Item[]):void {
-        if(this.rollResult == null) {
-            //not rolled yet
-            return
-        }
-        if(this.stock[index].sold || this.rollResult < this.stock[index].price) {
+    buy(index: number, gameState: GameState):void {
+        if(this.stock[index].sold || this.rollResult[0] < this.stock[index].price) {
             //already bought or too poor
             return
         }
-        this.rollResult = this.rollResult - this.stock[index].price;
+        this.rollResult[0] = this.rollResult[0] - this.stock[index].price;
         this.stock[index].sold = false
-        inventory.push(this.stock[index].item);
+        gameState.addToInventory([this.stock[index].item]);
     }
 
     getSpendable():number {
-        return this.rollResult;
-    }
-
-    resetEvent(): void {
-        super.resetEvent();
-        for(let i = 0; i < this.stock.length; i++) {
-            this.stock[i].sold = false;
-        }
+        return this.rollResultSum;
     }
 }
 

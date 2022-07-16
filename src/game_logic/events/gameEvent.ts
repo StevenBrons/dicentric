@@ -4,32 +4,40 @@ import Item from "../items/item";
 
 abstract class GameEvent {
     abstract name : string;
-    selectedDice : Dice[];
-    nrDiceSlots : number;
-    rollResult: number;
-    rolled : boolean = false;
+    abstract selectedDice : {dice: Dice[], text: string}[];
+    abstract nrDiceSlots : number[];
+    nrOptions : number; 
+    rollResult: number[];
+    rollResultSum: number;
+    rolled : boolean;
 
-    constructor() {
-        this.selectedDice = [];
-        this.nrDiceSlots = 0; //wat moet dit zijn?
-        this.rollResult = 0;
+    constructor(nrOptions: number) {
+        this.nrOptions = nrOptions;
+        this.rollResult = [];
+        this.rollResultSum = 0;
+        this.rolled = false;
+        for(let i = 0; i<this.nrOptions; i++) {
+            this.rollResult.push(0);
+        }
     }
 
-    rollDice(eqs: EquipState) {
+    rollDice(eqs: EquipState, option: number) {
         if(this.rolled) {
-            return
+            //already rolled
+            return;
         }
         this.rolled = true;
-        let result = this.selectedDice.map(d => d.roll(eqs.getDiceEquipment(d.type)));
-        this.rollResult = result.reduce((accumulator, current) => {
+        this.rollResult = this.selectedDice[option].dice.map(d => d.roll(eqs.getDiceEquipment(d.type)));
+        this.rollResultSum = this.rollResult.reduce((accumulator, current) => {
             return accumulator + current;
           }, 0);
-        return result;
+        //remove dice
+		this.selectedDice[option].dice = [];
     }
 
-    selectDice(d: Dice, inventory: Item[]) {
+    selectDice(d: Dice, option: number, inventory: Item[]) {
         //is there space to select
-        if(this.selectedDice.length >= this.nrDiceSlots){
+        if(this.selectedDice[option].dice.length >= this.nrDiceSlots[option]){
             throw new Error("trying to select dice while there is no space");
         }
         //is the die available to select
@@ -39,24 +47,18 @@ abstract class GameEvent {
         //remove from inventory and select
         let i = inventory.indexOf(d);
 		inventory.splice(i, 1);
-        this.selectedDice.push(d);
+        this.selectedDice[option].dice.push(d);
     }
 
-    deselectDice(d: Dice, inventory: Item[]) {
+    deselectDice(d: Dice, option: number, inventory: Item[]) {
         //is the dice selected?
-        if(!this.selectedDice.includes(d)) {
+        if(!this.selectedDice[option].dice.includes(d)) {
 			throw new Error("trying to deselect dice which is not selected");
 		}
         //remove from selection and add to inventory
-        let i = this.selectedDice.indexOf(d);
-		this.selectedDice.splice(i, 1);
+        let i = this.selectedDice[option].dice.indexOf(d);
+		this.selectedDice[option].dice.splice(i, 1);
         inventory.push(d);
-    }
-
-    resetEvent() : void {
-        this.selectedDice = [];
-        this.rolled = false;
-        this.rollResult = 0;
     }
 }
 
