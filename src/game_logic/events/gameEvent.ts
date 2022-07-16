@@ -1,5 +1,6 @@
-import Dice from "./dice";
-import Item from "./item";
+import Dice from "../items/dice";
+import EquipState from "../equipState";
+import Item from "../items/item";
 
 class GameEvent {
     selectedDice : Dice[];
@@ -7,9 +8,18 @@ class GameEvent {
     rollResult: number;
     rolled : boolean = false;
 
-    rollDice() {
+    constructor() {
+        this.selectedDice = [];
+        this.nrDiceSlots = 0; //wat moet dit zijn?
+        this.rollResult = 0;
+    }
+
+    rollDice(eqs: EquipState) {
+        if(this.rolled) {
+            return
+        }
         this.rolled = true;
-        let result = this.selectedDice.map(d => d.roll());
+        let result = this.selectedDice.map(d => d.roll(eqs.getDiceEquipment(d.type)));
         this.rollResult = result.reduce((accumulator, current) => {
             return accumulator + current;
           }, 0);

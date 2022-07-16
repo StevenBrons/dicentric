@@ -1,9 +1,15 @@
-import Dice from "./dice";
+import Dice from "../items/dice";
 import GameEvent from "./gameEvent";
-import Item from "./item";
+import Item from "../items/item";
 
 class ShopEvent extends GameEvent {
     stock : {item: Item, price: number, sold: boolean}[];
+
+    constructor(stock: {item: Item, price: number, sold: boolean}[]) {
+        super(); 
+        this.nrDiceSlots = 3; //aanpassen?
+        this.stock = stock;
+    }
 
     buy(index: number, inventory: Item[]):void {
         if(this.rollResult == null) {
@@ -17,6 +23,10 @@ class ShopEvent extends GameEvent {
         this.rollResult = this.rollResult - this.stock[index].price;
         this.stock[index].sold = false
         inventory.push(this.stock[index].item);
+    }
+
+    getSpendable():number {
+        return this.rollResult;
     }
 }
 

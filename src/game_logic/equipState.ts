@@ -1,11 +1,15 @@
-import Dice from "./dice";
-import Equipment from "./equipment";
+import Dice from "./items/dice";
+import Equipment from "./items/equipment";
 
 class EquipState {
     diceEquipment: Map<DICE, Equipment>;
 
+    constructor() {
+        this.diceEquipment = new Map();
+    }
+
     getDiceEquipment(d: DICE) {
-        //returns null if not present
+        //returns undefined if not present
         return this.diceEquipment.get(d);
     }
 }
