@@ -1,3 +1,4 @@
+import { DICE } from "../dice";
 import Equipment from "../equipment";
 
 class ExcludeOne extends Equipment {

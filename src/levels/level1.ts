@@ -1,6 +1,6 @@
 import MapState from "../game_logic/mapState";
 import Level from "../game_logic/level"
-import Dice from "../game_logic/items/dice";
+import Dice, { DICE } from "../game_logic/items/dice";
 import MapNode from "../game_logic/mapNode";
 import ShopEvent from "../game_logic/events/shopEvent";
 
