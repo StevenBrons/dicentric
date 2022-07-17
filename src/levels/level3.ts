@@ -95,11 +95,11 @@ let DialogueStart = new DialogueEvent([]
 		effect : {succes: (n: number)=>{return n>7?
 			{succes : true, text : "Your hunch was right! A dice is hidden beneath the platform!"}:
 			{succes : false, text : "Nothing... Apparently, these creators are just teasing you..."}}, 
-			rewards: [new Dice(DICE.d20)]}
+			rewards: [d20()]}
 		},
 		{
 		text : "Leave something for the next person to travel to this island.", slots : 1, 
-		effect : {succes: (n: number)=>{return {succes : true, text : "They bow before your might. They present you some dice."}}, rewards: []}
+		effect : {succes: (n: number)=>{return {succes : true, text : "They bow before your might. They present you some dice."}}, rewards: [new Dice(DICE.d20)]}
 		}
 		]
 		, "This island is looking eerily empty. What do you do?");
@@ -108,7 +108,7 @@ let DialogueStart = new DialogueEvent([]
 let eventPool = [constructBirdEvent(), constructBirdEvent(), constructBirdEvent(), constructBirdEvent()
 	, constructCubeEvent(), constructCubeEvent(), constructCubeEvent()
 	, constructNinjaEvent(), constructNinjaEvent(), constructNinjaEvent()
-	, {event: Dialogue1, image: "island_event"}, {event: Dialogue2, image: "island_event"}, {event: Dialogue3, image: "island_event"}, {event: Dialogue4, image: "island_event"}
+	, {event: Dialogue1, image: "island_event"}, {event: Dialogue2, image: "island_event"}, {event: Dialogue3, image: "island_event"}
 	, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}];
 
 //construct nodes
