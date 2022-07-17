@@ -26,6 +26,7 @@ const EquipSlot: React.FC<EquipSlotProps> = ({dice}) => {
 			item={gameState.equipment.getDiceEquipment(dice)}
 			key={dice}
 			slotType="tray"
+			canDrag={false}
 		/>
 	</div>
 }

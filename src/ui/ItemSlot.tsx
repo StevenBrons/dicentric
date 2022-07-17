@@ -1,12 +1,12 @@
-import { useState, FC } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { FC } from "react";
+import { useDrag } from "react-dnd";
 import Equipment from "../game_logic/items/equipment";
 import Item from "../game_logic/items/item";
 import "./ItemSlot.css";
 
-type SlotType = "inventory" | "dialogue" | "shop" | "tray";
+type SlotType = "inventory" | "dialogue" | "shop" | "tray" | "empty";
 
-const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean, canDrag?: boolean, onClick?: any, slotType: SlotType }> = ({ item, placeHolder, hasMultiple = false, canDrag = true, onClick = null, slotType }) => {
+const ItemSlot: FC<{ item?: Item | null, result?: string | null,  placeHolder?: string, hasMultiple?: boolean, canDrag?: boolean, onClick?: any, slotType: SlotType }> = ({ item, placeHolder, hasMultiple = false, canDrag = true, onClick, slotType, result }) => {
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: item instanceof Equipment ? "equipment" : "item",
@@ -16,10 +16,19 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 		})
 	});
 
+	if (result) {
+		return <div className={`ItemSlot ${slotType}`}>
+			<div className="Result placeholder" style={{ backgroundImage: `url('${placeHolder}')`}} draggable="false">
+				{result}
+			</div>
+		</div>
+	}
+
 	if (!item) {
 		return <div className={`ItemSlot ${slotType}`}>
-			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}} draggable="false"/>
-			{isDragging && "hoooi"}
+			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}} draggable="false">
+				{result}
+			</div>
 		</div>
 	}
 
