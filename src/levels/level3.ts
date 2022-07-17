@@ -43,22 +43,66 @@ let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, 
 
 //construct dialogue events
 //Dialogue start moet uitleggen dat je niet kan requippen
-let DialogueStart = new DialogueEvent([{text : "Search thoroughly, roll higher than 4 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>4?{succes : true, text : "You found some dice! \n d4 was added to your inventory. \n d4 was added to your inventory. \n d6 was added to you inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}
-	, {text : "Search for a bit, roll higher than 2 to succed", slots : 1, effect : {succes: (n: number)=>{return n>2?{succes : true, text : "You found a die! \n d6 was added to your inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6)]}}]
-	, "Welcome to Dicentric! You will move accross islands. Dice are used for every action. Your rolls determine the outcome. There seems to be something in the grass. Search the grass? You can choose not to by closing the window");
+let DialogueStart = new DialogueEvent([]
+	, "Phew! You made it to a new set of islands... Hmm, that large enemy seemed to have dropped something... A dice upgrade! Be careful though, once equipped, you cannot move the item to modify another dice!");
 
-let Dialogue1 = new DialogueEvent([]
-	, "There are some enemies up ahead. The creature pictured on the sign pointing up looks stronger than on the sign pointing down. Maybe it has a higher reward though?");
-
-let Dialogue2 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
-
-let Dialogue3 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
-
-let Dialogue4 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
-
+	let Dialogue1 = new DialogueEvent([
+		{
+		text : "Fight them head on! (>10 to succeed)", slots : 2, 
+		effect : {succes: (n: number)=>{return n>10?
+			{succes : true, text : "You're on a roll! They stood no chance!"}:
+			{succes : false, text : "They're not impressed by your rolling skills. They leave in disappointment..."}}, 
+			rewards: [new Dice(DICE.d12)]}
+		},
+		{
+			text : "Throw dice at their eyes and run! (>1 to succeed)", slots : 3, 
+			effect : {succes: (n: number)=>{return n>1?
+				{succes : true, text : "A classic hit and run! You quickly escape..."}:
+				{succes : false, text : "Hmm, this is not supposed to appear..."}}, 
+				rewards: []}
+		},
+		{
+		text : "Have a friendly chat! Be careful not to intimidate them though... (<4 to succeed)", slots : 1, 
+		effect : {succes: (n: number)=>{return n<4?
+			{succes : true, text : "Wow, they were actually really great! They offer you some dice for your adventure!"}:
+			{succes : false, text : "Yikes, they see you rollin', they hatin'! You quickly escape..."}}, 
+			rewards: [new Dice(DICE.d6), new Dice(DICE.d10), new Dice(DICE.d10)]}
+		}
+		]
+		, "Some dicey looking figures appear before you! What do you do?");
+	
+	let Dialogue2 = new DialogueEvent([
+		{
+		text : "Face their challenge! (>10 to succeed)", slots : 1, 
+		effect : {succes: (n: number)=>{return n>10?
+			{succes : true, text : "What a game! You won without any problems. They"}:
+			{succes : false, text : ""}}, 
+			rewards: [new Dice(DICE.d20), new Dice(DICE.d20)]}
+		},
+		{
+		text : "Intimidate your challenger (>8 to succeed)", slots : 1, 
+		effect : {succes: (n: number)=>{return n>8?
+			{succes : true, text : "They bow before your might. They present you some dice."}:
+			{succes : false, text : "It was not very effective! You quickly realize your challenger is way cooler than you are!"}}, 
+			rewards: [new Dice(DICE.d6), new Dice(DICE.d10), new Dice(DICE.d12)]}
+		}
+		]
+		, "You get challenged to a game of Yahtzee!");
+	
+	let Dialogue3 = new DialogueEvent([
+		{
+		text : "There must be something, the creator of this world wouldn't just leave an island empty! Right? Look around.", slots : 1, 
+		effect : {succes: (n: number)=>{return n>7?
+			{succes : true, text : "Your hunch was right! A dice is hidden beneath the platform!"}:
+			{succes : false, text : "Nothing... Apparently, these creators are just teasing you..."}}, 
+			rewards: [new Dice(DICE.d20)]}
+		},
+		{
+		text : "Leave something for the next person to travel to this island.", slots : 1, 
+		effect : {succes: (n: number)=>{return {succes : true, text : "They bow before your might. They present you some dice."}}, rewards: []}
+		}
+		]
+		, "This island is looking eerily empty. What do you do?");
 
 //construct eventpool and battles
 let eventPool = [constructBirdEvent(), constructBirdEvent(), constructBirdEvent(), constructBirdEvent()
