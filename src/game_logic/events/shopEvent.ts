@@ -38,7 +38,7 @@ class ShopEvent extends GameEvent {
     }
 
     canBuy(index : number) : boolean {
-        return this.rollResultSum >= this.stock[index].price;
+        return this.rollResultSum >= this.stock[index].price && !this.stock[index].sold;
     }
 
     eventEnded() : boolean {
