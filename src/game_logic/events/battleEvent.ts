@@ -48,6 +48,7 @@ class BattleEvent extends GameEvent {
 			case BATTLE_ACTION.defend: enemyAttack >= yourRoll?gameState.loseLives(enemyAttack - yourRoll):gameState.healLives(yourRoll - enemyAttack); break;
 		}		
 		if(this.enemy.dead) {
+			this.buttonText = "Roll!";
 			gameState.addToInventory(this.enemy.rewards);
 			this.description = this.enemy.textUponDefeat;
 			this.closable = true;
@@ -55,6 +56,9 @@ class BattleEvent extends GameEvent {
 	}
 
 	canPress() : boolean {
+		if(this.eventEnded()) {
+			return false;
+		}
 		if(this.canGoToNextRound()) {
 			return true;
 		}
