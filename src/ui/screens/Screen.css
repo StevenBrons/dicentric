@@ -15,17 +15,24 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   image-rendering: pixelated;
-	transition-delay: 1.5s;
+	transition-delay: 1.2s;
 	transition-duration: 1s;
 }
 
 .Screen.hidden {
-	transform: translateY(100vh);
+	transform: translateY(110vh);
 	transition-delay: 0s;
 }
 
 .Screen h1 {
 	margin-bottom: 20px;
+}
+
+.Screen .Actions {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
 }
 
 .ActionBar {
