@@ -4,14 +4,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import GameEvent from "../game_logic/events/gameEvent";
 import ShopEvent from "../game_logic/events/shopEvent";
 import GameState from "../game_logic/gameState";
-import testlevel1 from "../levels/testlevel1";
-import level1 from "../levels/testlevel2";
 import Tray from "./Tray";
 import MapLayer from "./MapLayer";
 import Battle  from "./screens/Battle";
 import Dialogue from "./screens/Dialogue";
 import Inventory from "./screens/Inventory";
 import Shop from "./screens/Shop";
+import level1 from "../levels/level1";
 
 function getScreen(gameEvent: GameEvent | null) {
 
