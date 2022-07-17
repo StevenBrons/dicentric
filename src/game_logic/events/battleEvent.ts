@@ -35,12 +35,12 @@ class BattleEvent extends GameEvent {
 		super.rollDice(gameState);
 		//next turn you can roll again
 		this.rolled = false;
-		let yourRoll = this.rollResult[this.selectedOption];
-		this.rollResult[this.selectedOption] = 0;
+		let yourRoll = this.rollResult[this.lastSelectedOption];
+		this.rollResult[this.lastSelectedOption] = 0;
 		//nu enemy actie 
 		let enemyAttack = this.enemy.attack();
 
-		switch(this.battleActions[this.selectedOption]){
+		switch(this.battleActions[this.lastSelectedOption]){
 			case BATTLE_ACTION.attack: this.enemy.loseLives(yourRoll); gameState.loseLives(enemyAttack); break;
 			case BATTLE_ACTION.defend: enemyAttack >= yourRoll?gameState.loseLives(enemyAttack - yourRoll):gameState.healLives(yourRoll - enemyAttack); break;
 		}		

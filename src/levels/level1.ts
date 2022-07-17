@@ -37,7 +37,7 @@ let tutorialDialogue = new DialogueEvent([{text : "Search thoroughly, roll highe
 let junctionDialogue = new DialogueEvent([]
 	, "There are some enemies up ahead. The creature pictured on the sign pointing up looks stronger than on the sign pointing down. Maybe it has a higher reward though?");
 
-let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
+let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu after closing the dialogue to equip it!"}}, rewards: [new PlusOne()]}}]
 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
 
 

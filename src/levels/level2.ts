@@ -9,13 +9,13 @@ import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
 import PlusOne from "../game_logic/items/equipment/plusOne";
 
 //construct shops
-let shop = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
+let shop1 = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
 	, {item: new Dice(DICE.d4), price: 2, sold: false}
 	, {item: new Dice(DICE.d6), price: 3, sold: false}
 	, {item: new Dice(DICE.d8), price: 4, sold: false}
 	, {item: new Dice(DICE.d10), price: 4, sold: false}
 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
-shop.description = "Welcome to the shop! You can roll some dice to get an amount to spend. Then, you can select items to buy them." 
+shop1.description = "Welcome to the shop! " 
 
 //construct enemies
 let bird = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");
