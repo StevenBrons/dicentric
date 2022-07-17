@@ -4,7 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import GameEvent from "../game_logic/events/gameEvent";
 import ShopEvent from "../game_logic/events/shopEvent";
 import GameState from "../game_logic/gameState";
-import level1 from "../levels/level1";
+import level1 from "../levels/testlevel2";
 import Inventory from "./Inventory";
 import MapLayer from "./MapLayer";
 import Battle  from "./screens/Battle";

@@ -25,7 +25,7 @@ abstract class GameEvent {
             this.rollResult.push(0);
         }
     }
-    //TODO IN SHOPEVENT ETC OVERWRITTEN EN SUPER AANROEPEN
+
     rollDice(option: number, gameState : GameState) {
         if(this.rolled) {
             //already rolled
@@ -55,14 +55,20 @@ abstract class GameEvent {
         this.selectedDice[option].push(d);
     }
 
-    deselectDice(d: Dice, option: number, gameState: GameState) {
+    deselectDice(d: Dice, gameState: GameState) {
         //is the dice selected?
-        if(!this.selectedDice[option].includes(d)) {
+        let selected = -1;
+        for(let i = 0; i < this.nrOptions; i++) {
+            if(this.selectedDice[i].includes(d)) {
+                selected = i;
+            }
+        }
+        if(selected === -1) {
 			throw new Error("trying to deselect dice which is not selected");
 		}
         //remove from selection and add to inventory
-        let i = this.selectedDice[option].indexOf(d);
-		this.selectedDice[option].splice(i, 1);
+        let i = this.selectedDice[selected].indexOf(d);
+		this.selectedDice[selected].splice(i, 1);
         gameState.inventory.push(d);
     }
 }
