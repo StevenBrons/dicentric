@@ -28,7 +28,7 @@ class DialogueEvent extends GameEvent {
 	rollDice(gameState: GameState): {succes : boolean, text : string} {
 		//returns true upon succes
 		super.rollDice(gameState);
-		if(this.dialogueActions[this.selectedOption].succes(this.rollResultSum).succes) {
+		if(this.dialogueActions[this.lastSelectedOption].succes(this.rollResultSum).succes) {
 			gameState.addToInventory(this.dialogueActions[this.selectedOption].rewards);
 			gameState.endEvent();
 			return this.dialogueActions[this.selectedOption].succes(this.rollResultSum);
