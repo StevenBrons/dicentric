@@ -77,7 +77,10 @@
 }
 
 .ActionBar .text {
-	margin: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 30px;
+	text-align: right;
 }
 
 .ItemGroup {

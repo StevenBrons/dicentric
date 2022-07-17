@@ -58,7 +58,7 @@ const OP = (new Array(100).fill(1)).map(x => new Dice(DICE.d20));
 
 //construct level
 let level1 = new Level(1, map, 
-	[new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)].concat(OP)
+	[new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new PlusOne()].concat(OP)
 );
 
 export default level1;

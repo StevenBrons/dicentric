@@ -8,6 +8,7 @@ import Level from "./level";
 import Dice, { DICE } from "./items/dice";
 import InventoryEvent from "./events/inventoryEvent";
 import level1 from "../levels/level1";
+import { cloneDeep } from "lodash";
 
 
 class GameState {
@@ -33,7 +34,7 @@ class GameState {
 	}
 
 	static initialGameState() : GameState {
-		return new GameState([level1]);
+		return new GameState([level1, cloneDeep(level1)]);
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {

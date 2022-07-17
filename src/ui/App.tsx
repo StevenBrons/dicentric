@@ -30,11 +30,11 @@ function getScreen(gameEvent: GameEvent | null) {
 
 type GameContext = [GameState, () => void, number];
 
-export const gameContext = React.createContext<GameContext>([new GameState([level1,level1]), () => {}, 0])
+export const gameContext = React.createContext<GameContext>([GameState.initialGameState(), () => {}, 0])
 
 function App() {
   
-  const [gameState, setGameState] = useState(new GameState([level1,level1]));
+  const [gameState, setGameState] = useState(GameState.initialGameState());
   const [updateNumber, setUpdateNumber] = useState(0);
 
   const showScreen = gameState.eventState;
