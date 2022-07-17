@@ -8,8 +8,7 @@ import Level from "./level";
 import Dice, { DICE } from "./items/dice";
 import InventoryEvent from "./events/inventoryEvent";
 import level1 from "../levels/level1";
-import { cloneDeep } from "lodash";
-
+import AverageOnly from "./items/equipment/averageOnly";
 
 class GameState {
 	mapState: MapState;
@@ -34,7 +33,10 @@ class GameState {
 	}
 
 	static initialGameState() : GameState {
-		return new GameState([level1, cloneDeep(level1)]);
+		let gameState = new GameState([level1]);
+		gameState.inventory.push(new AverageOnly());
+		gameState.equipDice(new AverageOnly(), DICE.d4);
+		return gameState;
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {
@@ -136,17 +138,24 @@ class GameState {
 		if(this.eventState === null) {
 			return "Equip"
 		}
+		if(this.inventory.filter(item => (item instanceof Dice)).length === 0 && !this.eventState?.closable) {
+			return "Restart";
+		}
 		return this.eventState.buttonText;
 	}
 
 	canPress() : boolean {
-		if(this.eventState === null) {
+		if(this.eventState === null || this.getButtonText() === "Restart") {
 			return true;
 		}
 		return this.eventState.canPress();
 	}
 
 	pressButton() : void {
+		if(this.getButtonText() === "Restart") {
+			this.resetLevel();
+			return;
+		}
 		if(this.eventState === null) {
 			if(this.levelCompleted()) {
 				this.updateLevel();
