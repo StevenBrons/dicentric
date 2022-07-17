@@ -19,6 +19,7 @@ abstract class GameEvent {
     lastSelectedOption : number = -1;
     selectedOption : number = -1;
     nrOfDiceSelected : number = 0;
+    lastRolledDice : Dice[] = [];
 
     constructor(nrOptions: number) {
         this.nrOptions = nrOptions;
@@ -37,6 +38,7 @@ abstract class GameEvent {
         }
         this.nrOfDiceSelected = 0;
         this.rolled = true;
+        this.lastRolledDice = this.selectedDice[this.selectedOption];
         this.rollResult = this.selectedDice[this.selectedOption].map(d => d.roll(gameState.equipment.getDiceEquipment(d.type)));
         this.rollResultSum = this.rollResult.reduce((accumulator, current) => {
             return accumulator + current;
