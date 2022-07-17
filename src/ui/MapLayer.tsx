@@ -1,3 +1,4 @@
+import { update } from "lodash";
 import { FC, useContext, useState } from "react";
 import { gameContext } from "./App";
 import "./MapLayer.css";
@@ -30,7 +31,7 @@ const Node : FC<NodeProps> = ({pos: {x, y}, pixelSize, onClick, canTravel}) => {
 
 const MapLayer = () => {
 
-	const [gameState, setGameState] = useContext(gameContext);
+	const [gameState, update] = useContext(gameContext);
 	const { location, map } = gameState.mapState;
 	const screenSize = getWindowDimensions();
 
@@ -46,7 +47,7 @@ const MapLayer = () => {
 		<Node
 			pos={{x: node.x, y: node.y}}
 			key={node.id}
-			onClick={() => { gameState.move(node); setGameState(gameState)}}
+			onClick={() => { gameState.move(node); update()}}
 			pixelSize={pixelSize}
 			canTravel={location.nodesInFront.includes(node)}
 		/>

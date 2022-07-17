@@ -9,8 +9,12 @@ class EquipState {
     }
 
     getDiceEquipment(d: DICE) {
-        //returns undefined if not present
-        return this.diceEquipment.get(d);
+        const eq = this.diceEquipment.get(d);
+        if (eq) {
+            return eq;
+        } else {
+            return null;
+        }
     }
 }
 

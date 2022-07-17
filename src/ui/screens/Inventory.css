@@ -1,0 +1,28 @@
+
+
+
+.Inventory {
+	background-color: orange;
+	grid-row-start: event_c2;
+	grid-row-end: event_c2;
+	grid-column-start: event_c2;
+	grid-column-end: event_c2;
+	padding: 20px;
+	pointer-events: all;
+	display: grid;
+	grid-template-rows: 10% auto auto;
+	grid-template-columns: 1fr;
+	align-items: stretch;
+}
+
+.Inventory .Inner {
+	display: flex;
+	gap: 30px;
+	margin: 20px;
+}
+
+.Inventory .Inner .Slots {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+}

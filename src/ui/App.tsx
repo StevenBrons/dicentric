@@ -1,15 +1,16 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useContext, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import GameEvent from "../game_logic/events/gameEvent";
 import ShopEvent from "../game_logic/events/shopEvent";
 import GameState from "../game_logic/gameState";
+import testlevel1 from "../levels/testlevel1";
 import level1 from "../levels/testlevel2";
-import Inventory from "./Inventory";
+import Tray from "./Tray";
 import MapLayer from "./MapLayer";
 import Battle  from "./screens/Battle";
 import Dialogue from "./screens/Dialogue";
-import Equipment from "./screens/Equipment";
+import Inventory from "./screens/Inventory";
 import Shop from "./screens/Shop";
 
 function getScreen(gameEvent: GameEvent | null) {
@@ -19,8 +20,6 @@ function getScreen(gameEvent: GameEvent | null) {
       return <Shop shopEvent={gameEvent as ShopEvent}/>
     case "Battle":
       return <Battle />
-    case "Equipment":
-      return <Equipment />
     case "Dialogue":
       return <Dialogue />
     default:
@@ -28,17 +27,17 @@ function getScreen(gameEvent: GameEvent | null) {
   }
 }
 
-type GameContext = [GameState, (x: GameState) => void, number];
+type GameContext = [GameState, () => void, number];
 
 export const gameContext = React.createContext<GameContext>([new GameState(level1), () => {}, 0])
 
 function App() {
   
-  const [gameState, setGameState] = useState(new GameState(level1));
+  const [gameState, setGameState] = useState(new GameState(testlevel1));
   const [updateNumber, setUpdateNumber] = useState(0);
 
-  function updateGameState(gs: GameState) {
-    setGameState(gs);
+  function updateGameState() {
+    setGameState(gameState);
     setUpdateNumber(updateNumber + 1);
   }
 
@@ -48,14 +47,35 @@ function App() {
         <MapLayer />
         <div className="MenuLayer">
           {getScreen(gameState.eventState)}
-          <Inventory items={gameState.inventory} />
-          <div tabIndex={1} className="RollButton" onClick={() => console.log("ere")} >
-            Roll
-          </div>
+          {/* <Inventory /> */}
+          <Tray />
+          { gameState.eventState ? <RollButton /> : <div />}
         </div>
       </ gameContext.Provider>
     </DndProvider>
   );
 }
+
+const RollButton = () => {
+
+  const [gameState, update] = useContext(gameContext);
+  const [isDown, setDown] = useState(false);
+  const canRoll = !gameState.eventState?.rolled
+
+  return <div
+    className={`RollButton ${isDown && canRoll ? "down" : "up"} ${canRoll ? "enabled" : "disabled"}`}
+    onMouseDown={() => setDown(true)}
+    onMouseUp={() => setDown(false)}
+    onClick={() => {
+      if (canRoll) {
+        gameState.eventState?.rollDice(0, gameState);
+        update();
+      }}
+    } 
+  >
+    Roll
+  </div>
+}
+
 
 export default App;

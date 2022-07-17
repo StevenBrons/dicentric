@@ -46,8 +46,8 @@ class Dice extends Item {
 		return this.type;
 	}
 
-	roll(eq: Equipment | undefined):number {
-		if(eq !== undefined) {
+	roll(eq: Equipment | null):number {
+		if(eq !== null) {
 			//alter roll according to equipment
 			return eq.rollWithEq(this.type);
 		}

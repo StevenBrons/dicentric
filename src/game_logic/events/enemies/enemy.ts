@@ -18,7 +18,7 @@ class Enemy {
 	}
 
 	attack() : number {
-		this.lastRoll = this.availableDice.map(d => d.roll(undefined));
+		this.lastRoll = this.availableDice.map(d => d.roll(null));
 		return this.lastRoll.reduce((accumulator, current) => {
             return accumulator + current;
           }, 0);
