@@ -6,15 +6,17 @@ class MapState {
     startNode: MapNode;
     endNode : MapNode;
     map : MapNode[];
+    eventPool : (GameEvent|null)[];
     image : string;
 
-    constructor(map: MapNode[], image: string) {
+    constructor(map : MapNode[], eventPool : (GameEvent|null)[], image : string) {
         if(map.length === 0) {
             throw Error("trying to construct MapState with empty map")
         } 
         this.startNode = map[0];
         this.endNode = map[map.length - 1];
         this.map = map;
+        this.eventPool = eventPool;
         this.randomizeMap();
         this.location = this.startNode;
         this.image = image;
@@ -33,16 +35,13 @@ class MapState {
         return this.location.event;
     }
 
-    //todo: moet uit een grotere pool
     randomizeMap() : void {
-        let events = [];
-        //add all events to randomize (including nulls) to array events
-        for(let i = 1; i<this.map.length - 1; i++) {
-            events.push(this.map[i].event);
+        for(let i = this.eventPool.length; i<this.map.length-2; i++){
+            this.eventPool.push(null);
         }
-        this.shuffleArray(events);
+        this.shuffleArray(this.eventPool);
         for(let i = 1; i<this.map.length - 1; i++) {
-            this.map[i].event = events[i];
+            this.map[i].event = this.eventPool[i-1];
         }
     }
 

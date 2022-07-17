@@ -3,7 +3,7 @@ import MapState from "./mapState";
 
 class Level {
     number : number;
-    map : MapState;
+    map : MapState; //should not have events except for startnode and endnode
     startInventory : Item[];
 
     constructor(levelNr: number, map: MapState, startInventory: Item[]) {

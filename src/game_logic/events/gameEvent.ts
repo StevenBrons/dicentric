@@ -8,6 +8,7 @@ export type GameAction = {
 
 abstract class GameEvent {
     abstract name : string;
+    abstract description : string;
     abstract selectedDice : Dice[][];
     abstract actions : GameAction[];
     nrOptions : number; 

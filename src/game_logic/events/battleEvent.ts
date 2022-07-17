@@ -9,6 +9,7 @@ export enum BATTLE_ACTION {
 }
 
 class BattleEvent extends GameEvent {
+	description: string = "Battle! Kill the enemy!";
     selectedDice: Dice[][];
     name: string;
 	actions: GameAction[];
@@ -36,17 +37,14 @@ class BattleEvent extends GameEvent {
 		let yourRoll = this.rollResult[option];
 		//nu enemy actie 
 		let enemyAttack = this.enemy.attack();
-		if(enemyAttack >= yourRoll) {
-			gameState.loseLives(enemyAttack - yourRoll);
-		} else {
-			switch(this.battleActions[option]){
-				case BATTLE_ACTION.attack: this.enemy.loseLives(yourRoll - enemyAttack); break;
-				case BATTLE_ACTION.defend: gameState.healLives(yourRoll - enemyAttack); break;
-			}
-			if(this.enemy.dead) {
-				gameState.addToInventory(this.enemy.rewards);
-				gameState.endEvent();
-			}
+
+		switch(this.battleActions[option]){
+			case BATTLE_ACTION.attack: this.enemy.loseLives(yourRoll); gameState.loseLives(enemyAttack); break;
+			case BATTLE_ACTION.defend: enemyAttack >= yourRoll?gameState.loseLives(enemyAttack - yourRoll):gameState.healLives(yourRoll - enemyAttack); break;
+		}		
+		if(this.enemy.dead) {
+			gameState.addToInventory(this.enemy.rewards);
+			gameState.endEvent();
 		}
 	}
 }

@@ -4,6 +4,7 @@ import Dice from "../items/dice";
 import GameState from "../gameState";
 
 class ShopEvent extends GameEvent {
+    description: string = "Welcome! Buy stuff idk";
     selectedDice: Dice[][];
     name: string;
     actions : GameAction[];

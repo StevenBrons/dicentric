@@ -89,7 +89,7 @@ class GameState {
 		this.level = level.number;
 		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(level.startInventory);
 		this.inventoryStartLevel = this.inventory;
-		this.lives = 20; //of oude hoeveelheid levens???
+		this.lives = 200; //of oude hoeveelheid levens???
 		this.eventState = level.map.startNode.event;
 	}
 

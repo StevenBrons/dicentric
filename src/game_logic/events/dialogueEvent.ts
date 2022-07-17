@@ -4,6 +4,7 @@ import Item from "../items/item";
 import GameState from "../gameState";
 
 class DialogueEvent extends GameEvent {
+	description: string = "Choose your action";
 	actions: GameAction[];
     selectedDice: Dice[][];
     name: string;
