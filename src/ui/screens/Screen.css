@@ -1,0 +1,123 @@
+
+.Screen {
+	grid-row-start: event_c1;
+	grid-row-end: event_c1;
+	grid-column-start: event_c1;
+	grid-column-end: event_c2;
+	padding: 45px;
+	pointer-events: all;
+	display: grid;
+	grid-template-rows: 15% min-content auto min-content;
+	gap: 20px;
+	grid-template-columns: 1fr;
+	align-items: stretch;
+	justify-content: space-between;
+	background-image: url("../../../public/res/dialogue_box.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+	transition-delay: 1.2s;
+	transition-duration: 1s;
+}
+
+.Screen.hidden1 {
+	transform: translate(0px, 110vh);
+	grid-row-start: event_c1;
+	grid-row-end: event_c1;
+	grid-column-start: event_c1;
+	grid-column-end: event_c2;
+	transition-delay: 0s;
+}
+
+.Screen.hidden2 {
+	transform: translate(0px, 110vh);
+	grid-row-start: event_c2;
+	grid-row-end: event_c2;
+	grid-column-start: event_c2;
+	grid-column-end: event_c2;
+	transition-delay: 0s;
+}
+
+.Screen h1 {
+	margin: auto;
+	margin-left: 5px;
+}
+
+.Screen .Actions {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: flex-end;
+}
+
+.ActionBar {
+	width: 100%;
+	height: 100px;
+	display: grid;
+	grid-template-columns: 1fr 40% 150px;
+	grid-template-rows: 1fr;
+}
+
+.ActionBar .Sum {
+	display: flex;
+	align-items: center;
+	font-size: 30px;
+}
+
+.ActionBar.disabled {
+	filter: opacity(20%);
+}
+
+.ActionBar.hasActivated {
+	filter: opacity(100%) !important;
+}
+
+.ActionBar.enabled:hover {
+	filter: brightness(120%);
+}
+
+.ActionBar .text {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 30px;
+	text-align: right;
+}
+
+.ItemGroup {
+	height: 100%;
+	display: inline-block;
+	display: flex;
+	height: 100%;
+	flex-direction: row;
+	justify-content: left;
+	gap: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.CloseButton {
+	width: 60px;
+	height: 60px;
+	top: 30px;
+	right: 35px;
+  cursor: pointer;
+  grid-area: event_c2;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+  transition-duration: 40ms;
+	transition-timing-function: ease-out;
+}
+
+.CloseButton.down {
+  filter: brightness(80%);
+}
+
+.CloseButton.up {
+  background-image: url("../../../public/res/cross.png");
+}
+
+.CloseButton:hover {
+  filter: brightness(60%);
+}
