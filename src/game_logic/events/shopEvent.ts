@@ -4,7 +4,8 @@ import Dice from "../items/dice";
 import GameState from "../gameState";
 
 class ShopEvent extends GameEvent {
-    description: string = "Welcome! Buy stuff idk";
+    closable: boolean = true;
+    description: string = "Welcome! Buy stuff";
     selectedDice: Dice[][];
     name: string;
     actions : GameAction[];
@@ -18,8 +19,8 @@ class ShopEvent extends GameEvent {
         this.stock = stock;
     }
 
-    rollDice(option : number, gameState : GameState): void {
-        super.rollDice(option, gameState);
+    rollDice(gameState : GameState): void {
+        super.rollDice(gameState);
     }
 
     buy(index: number, gameState: GameState):void {

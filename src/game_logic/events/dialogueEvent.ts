@@ -4,14 +4,16 @@ import Item from "../items/item";
 import GameState from "../gameState";
 
 class DialogueEvent extends GameEvent {
-	description: string = "Choose your action";
+	closable: boolean = true;
+	description: string;
 	actions: GameAction[];
     selectedDice: Dice[][];
     name: string;
-	dialogueActions: {succes: (n: number) => boolean, rewards: Item[]}[];
+	dialogueActions: {succes: (n: number) => {succes : boolean, text : string}, rewards: Item[]}[];
 
-    constructor(actions: {text: string, slots: number, effect: {succes: (n: number) => boolean, rewards: Item[]}}[]) { //effects implementeren
+    constructor(actions: {text: string, slots: number, effect: {succes: (n: number) => {succes : boolean, text : string}, rewards: Item[]}}[], description : string) { //effects implementeren
         super(actions.length);
+		this.description = description;
 		this.actions = []; 
 		this.selectedDice = [];
 		this.dialogueActions = [];
@@ -23,16 +25,16 @@ class DialogueEvent extends GameEvent {
         this.name = "Dialogue";
     }
 
-	rollDice(option: number, gameState: GameState): boolean {
+	rollDice(gameState: GameState): {succes : boolean, text : string} {
 		//returns true upon succes
-		super.rollDice(option, gameState);
-		if(this.dialogueActions[option].succes(this.rollResultSum)) {
-			gameState.addToInventory(this.dialogueActions[option].rewards);
+		super.rollDice(gameState);
+		if(this.dialogueActions[this.selectedOption].succes(this.rollResultSum).succes) {
+			gameState.addToInventory(this.dialogueActions[this.selectedOption].rewards);
 			gameState.endEvent();
-			return true;
+			return this.dialogueActions[this.selectedOption].succes(this.rollResultSum);
 		}
 		gameState.endEvent();
-		return false;
+		return this.dialogueActions[this.selectedOption].succes(this.rollResultSum);
 	}
 }
 

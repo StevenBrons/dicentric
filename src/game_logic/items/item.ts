@@ -1,5 +1,6 @@
-class Item {
+abstract class Item {
     id : number;
+    abstract description : string;
     image : string;
 
     constructor() {

@@ -11,12 +11,14 @@ export enum DICE {
 }
 
 class Dice extends Item {
+	description: string;
 	type: DICE;
 
 	constructor(d: DICE) {
 		super();
 		this.image = Dice.getImage(d)
 		this.type = d;
+		this.description = "Die that rolls the numbers 1 through" + d;
 	}
 
 	static getImage(d: DICE) {

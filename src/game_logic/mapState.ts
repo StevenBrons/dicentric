@@ -41,7 +41,9 @@ class MapState {
         }
         this.shuffleArray(this.eventPool);
         for(let i = 1; i<this.map.length - 1; i++) {
-            this.map[i].event = this.eventPool[i-1];
+            if(!this.map[i].fixedEvent) {
+                this.map[i].event = this.eventPool[i-1];
+            }
         }
     }
 

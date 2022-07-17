@@ -7,6 +7,7 @@ export type GameAction = {
 }
 
 abstract class GameEvent {
+    abstract closable : boolean;
     abstract name : string;
     abstract description : string;
     abstract selectedDice : Dice[][];
@@ -15,6 +16,7 @@ abstract class GameEvent {
     rollResult: number[];
     rollResultSum: number;
     rolled : boolean;
+    selectedOption : number = -1;
 
     constructor(nrOptions: number) {
         this.nrOptions = nrOptions;
@@ -26,18 +28,18 @@ abstract class GameEvent {
         }
     }
 
-    rollDice(option: number, gameState : GameState) {
+    rollDice(gameState : GameState) {
         if(this.rolled) {
             //already rolled
             return;
         }
         this.rolled = true;
-        this.rollResult = this.selectedDice[option].map(d => d.roll(gameState.equipment.getDiceEquipment(d.type)));
+        this.rollResult = this.selectedDice[this.selectedOption].map(d => d.roll(gameState.equipment.getDiceEquipment(d.type)));
         this.rollResultSum = this.rollResult.reduce((accumulator, current) => {
             return accumulator + current;
           }, 0);
         //remove dice
-		this.selectedDice[option] = [];
+		this.selectedDice[this.selectedOption] = [];
     }
 
     selectDice(d: Dice, option: number, gameState: GameState) {
@@ -50,6 +52,7 @@ abstract class GameEvent {
 			throw new Error("trying to select dice which is not in inventory");
 		}
         //remove from inventory and select
+        this.selectedOption = option;
         let i = gameState.inventory.indexOf(d);
 		gameState.inventory.splice(i, 1);
         this.selectedDice[option].push(d);
