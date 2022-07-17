@@ -32,14 +32,8 @@ const ActionBar : FC<Props> = ({ index }) => {
 	for (let i = 0; i < action.nrDiceSlots; i++) {
 		if (hasActivated) {
 			if (c < event.rollResult.length) {
-				slots[i] = <div className="ItemSlot dialogue">
-					<div className="Result">
-						{event.rollResult[i]}
-					</div>
-				</div>;
-			} else {
-				slots[i] = <ItemSlot key={i} item={null} slotType="dialogue" />
-			}
+					slots[i] = <ItemSlot key={i} result={event.rollResult[i] + ""} slotType="dialogue" />
+			} 
 		} else {
 			if (c < selectedDice.length) {
 				slots[i] = <ItemSlot key={i} item={selectedDice[c]} slotType="dialogue" />
