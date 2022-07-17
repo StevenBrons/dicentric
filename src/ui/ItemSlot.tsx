@@ -7,7 +7,7 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: "item",
-		item: { id: 10 },
+		item,
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging()
 		})

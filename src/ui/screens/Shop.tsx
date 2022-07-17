@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import ShopEvent from "../../game_logic/events/shopEvent";
 import ActionBar from "../ActionBar";
+import { gameContext } from "../App";
 import ItemSlot from "../ItemSlot";
 import Screen from "./Screen";
 import "./Shop.css";
@@ -9,9 +10,14 @@ interface Props {
 	shopEvent: ShopEvent
 }
 
-const Shop : FC<Props> = ({ shopEvent}) => {
-	const stock = shopEvent.stock.map((item, i) => <div>
-		<ItemSlot item={item.sold ? null : item.item} key={i} placeHolder={item.item.image}/>
+const Shop : FC<Props> = ({ shopEvent }) => {
+
+	const [gameState, setGameState] = useContext(gameContext);
+
+	console.log(shopEvent.selectedDice[0]);
+
+	const stock = shopEvent.stock.map((item, i) => <div key={i}>
+		<ItemSlot item={item.sold ? null : item.item} placeHolder={item.item.image}/>
 		<span>
 			{item.price}
 		</span>
@@ -26,7 +32,12 @@ const Shop : FC<Props> = ({ shopEvent}) => {
 		<div className="Stock">
 			{stock}
 		</div>
-		{shopEvent.actions.map(a => <ActionBar action={a}/>)}
+		{shopEvent.actions.map((a,i) => <ActionBar
+			action={a}
+			selectedDice={shopEvent.selectedDice[i]}
+			selectDice={(d) => {shopEvent.selectDice(d, i, gameState); setGameState(gameState)}}
+			key={i}
+		/>)}
 	</Screen>
 }
 

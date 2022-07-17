@@ -37,8 +37,8 @@ function App() {
   const [gameState, setGameState] = useState(new GameState(level1));
   const [updateNumber, setUpdateNumber] = useState(0);
 
-  function updateGameState(gs: GameState) {
-    setGameState(gs);
+  function updateGameState() {
+    setGameState(gameState);
     setUpdateNumber(updateNumber + 1);
   }
 
@@ -48,7 +48,7 @@ function App() {
         <MapLayer />
         <div className="MenuLayer">
           {getScreen(gameState.eventState)}
-          <Inventory items={gameState.inventory} />
+          <Inventory />
           <div tabIndex={1} className="RollButton" onClick={() => console.log("ere")} >
             Roll
           </div>
