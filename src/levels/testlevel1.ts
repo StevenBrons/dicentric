@@ -8,11 +8,6 @@ import ShopEvent from "../game_logic/events/shopEvent";
 let shop1 = new ShopEvent([{item: new Dice(DICE.d8), price: 3, sold: false}]);
 let shop2 = new ShopEvent([{item: new Dice(DICE.d10), price: 4, sold: false}, {item: new Dice(DICE.d4), price: 2, sold: false}]);
 
-//construct enemies
-
-
-//construct dialogue events
-
 //construct map
 let node4 = new MapNode([], 10, 5, 2, null);
 let node3 = new MapNode([node4], 5, 10, 1, null);
