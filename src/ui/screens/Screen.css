@@ -1,9 +1,34 @@
 
-
 .Screen {
 	grid-row-start: topevent;
 	grid-row-end: bottomevent;
 	grid-column-start: topevent;
 	grid-column-end: bottomevent;
 	padding: 20px;
+	pointer-events: all;
+	display: grid;
+	grid-template-rows: 10% auto auto;
+	grid-template-columns: 1fr;
+	align-items: stretch;
+	align-content: space-between;    
+}
+
+.ActionBar {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-columns: 1fr 40%;
+	grid-template-rows: 1fr;
+	background-color: orange;
+}
+
+.ActionBar:hover {
+	filter: brightness(120%);
+}
+
+.ActionBar .text {
+	margin: auto;
+}
+
+.ActionBar .ItemGroup {
 }
