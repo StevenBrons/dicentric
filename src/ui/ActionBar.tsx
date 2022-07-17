@@ -1,12 +1,18 @@
-import "./Battle.css";
-import Screen from "./Screen";
+import { FC } from "react";
+import { GameAction } from "../game_logic/events/gameEvent";
+import ItemGroup from "./ItemGroup";
 
-const Battle = () => {
-	return <Screen name="Battle">
-		<h1>
-			Battle
-		</h1>
-	</Screen>
+interface Props {
+	action: GameAction
 }
 
-export default Battle;
+const ActionBar : FC<Props> = ({ action }) => {
+	return <div className="ActionBar">
+		<div className="text">
+			{action.text}
+		</div>
+		<ItemGroup width={action.nrDiceSlots}/>
+	</div>
+}
+
+export default ActionBar;

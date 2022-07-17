@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import GameEvent from "../game_logic/events/gameEvent";
+import ShopEvent from "../game_logic/events/shopEvent";
 import GameState from "../game_logic/gameState";
 import level1 from "../levels/level1";
 import Inventory from "./Inventory";
@@ -15,7 +16,7 @@ function getScreen(gameEvent: GameEvent | null) {
 
   switch (gameEvent?.name) {
     case "Shop":
-      return <Shop />
+      return <Shop shopEvent={gameEvent as ShopEvent}/>
     case "Battle":
       return <Battle />
     case "Equipment":
