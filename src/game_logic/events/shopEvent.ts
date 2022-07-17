@@ -40,6 +40,10 @@ class ShopEvent extends GameEvent {
     canBuy(index : number) : boolean {
         return this.rollResultSum >= this.stock[index].price;
     }
+
+    eventEnded() : boolean {
+        return false;
+    }
 }
 
 export default ShopEvent;

@@ -8,13 +8,15 @@ class Enemy {
 	lastRoll : number[];
 	dead : boolean = false;
 	rewards : Item[];
+	textUponDefeat : string;
 
-	constructor(health : number, image : string, availableDice : Dice[], rewards : Item[]) {
+	constructor(health : number, image : string, availableDice : Dice[], rewards : Item[], textUponDefeat : string) {
 		this.health = health;
 		this.image = image;
 		this.availableDice = availableDice;
 		this.lastRoll = [];
 		this.rewards = rewards;
+		this.textUponDefeat = textUponDefeat;
 	}
 
 	attack() : number {

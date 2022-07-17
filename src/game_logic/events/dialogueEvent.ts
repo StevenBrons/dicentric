@@ -33,8 +33,11 @@ class DialogueEvent extends GameEvent {
 			gameState.endEvent();
 			return this.dialogueActions[this.selectedOption].succes(this.rollResultSum);
 		}
-		gameState.endEvent();
 		return this.dialogueActions[this.selectedOption].succes(this.rollResultSum);
+	}
+
+	eventEnded() : boolean {
+		return this.rolled;
 	}
 }
 

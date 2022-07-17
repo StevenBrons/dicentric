@@ -46,8 +46,12 @@ class BattleEvent extends GameEvent {
 		}		
 		if(this.enemy.dead) {
 			gameState.addToInventory(this.enemy.rewards);
-			gameState.endEvent();
+			this.closable = true;
 		}
+	}
+
+	eventEnded() : boolean {
+		return this.enemy.dead;
 	}
 }
 

@@ -96,7 +96,7 @@ class GameState {
 	resetLevel() : void{
 		this.mapState.resetMap();
 		this.inventory = this.inventoryStartLevel;
-		this.lives = 20;
+		this.lives = 200;
 		this.eventState = this.mapState.startNode.event;
 	}
 }
