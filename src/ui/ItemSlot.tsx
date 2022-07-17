@@ -15,13 +15,18 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 
 	if (!item) {
 		return <div className="ItemSlot">
-			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}}/>
+			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}} draggable="false"/>
 			{isDragging && "hoooi"}
 		</div>
 	}
 
 	return <div className="ItemSlot Selectable">
-		<div className="Item" style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}} ref={dragRef}/>
+		<div
+			className="Item"
+			data-tip="React-tooltip"
+			style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}}
+			ref={dragRef}
+			/>
 	</div>
 
 }

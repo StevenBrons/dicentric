@@ -30,6 +30,6 @@ let node1 = new MapNode([node2,node3,node4], 0, 15, 2, null);
 let map = new MapState([node1,node2,node3,node4,node5,node6,node7,node8,node9,node10,node11,node12,node13,node14,node15,node16,node17],
 	 [shop1,shop2], ""); 
 
-let level1 = new Level(1, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6)]);
+let testlevel2 = new Level(1, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6)]);
 
-export default level1;
+export default testlevel2;

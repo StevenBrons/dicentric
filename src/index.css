@@ -1,11 +1,40 @@
 * {
   box-sizing: border-box;
   font-family: prstart;
+  user-select: none;
 }
 
 html, body {
   margin: 0px;
   padding: 0px;
+}
+
+.reacttooltip {
+  z-index: 1000;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 #root {
@@ -24,24 +53,24 @@ html, body {
   padding: 20px;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 1fr 25%;
+  grid-template-columns: 1fr 30% 25%;
   grid-template-rows: 1fr 15%;
   grid-template-areas:
-    "topevent inventory"
-    "bottomevent roll";
+    "event_c1 event_c2 tray"
+    "event_c1 event_c2 roll";
   pointer-events: none;
 }
 
-.Inventory {
+.Tray {
   color: #5D2C28;
-	grid-area: inventory;
+	grid-area: tray;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 35px;
   padding-bottom: 40px;
 	position: relative;
 	pointer-events: all;
-  background-image: url("../public/res/inventory.png");
+  background-image: url("../public/res/tray.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   image-rendering: pixelated;
@@ -52,19 +81,19 @@ html, body {
   align-items: center;
 }
 
-.Inventory span {
+.Tray span {
   text-align: left;
   user-select: none;
 }
 
-.Inventory.bottom {
+.Tray.bottom {
 	top: 100px;
 	left: 0px;
 	width: 100%;
 	height: 100%;
 }
 
-.Inventory .Glow {
+.Tray .Glow {
   filter: brightness(120%);
 }
 
@@ -76,7 +105,6 @@ html, body {
   font-size: 30px;
   position: relative;
   pointer-events: all;
-  background-image: url("../public/res/roll_button.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   image-rendering: pixelated;
@@ -84,12 +112,20 @@ html, body {
 	transition-timing-function: ease-out;
 }
 
-.RollButton:hover {
+.RollButton.enabled:hover {
   filter: brightness(120%);
 }
 
-.RollButton:focus {
+.RollButton.disabled {
+  filter: sepia(100%);
+}
+
+.RollButton.down {
   background-image: url("../public/res/roll_button_click.png");
+}
+
+.RollButton.up {
+  background-image: url("../public/res/roll_button.png");
 }
 
 @font-face {

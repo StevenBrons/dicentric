@@ -1,9 +1,9 @@
 
 .Screen {
-	grid-row-start: topevent;
-	grid-row-end: bottomevent;
-	grid-column-start: topevent;
-	grid-column-end: bottomevent;
+	grid-row-start: event_c1;
+	grid-row-end: event_c1;
+	grid-column-start: event_c1;
+	grid-column-end: event_c2;
 	padding: 20px;
 	pointer-events: all;
 	display: grid;
@@ -30,4 +30,16 @@
 }
 
 .ActionBar .ItemGroup {
+}
+
+.ItemGroup {
+	height: 100%;
+	display: inline-block;
+}
+
+.ItemGroup .inner {
+	display: grid;
+	height: 100%;
+	flex-direction: row;
+	justify-content: space-around;
 }
