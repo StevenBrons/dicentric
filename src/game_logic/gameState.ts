@@ -8,6 +8,7 @@ import Level from "./level";
 import Dice, { DICE } from "./items/dice";
 import InventoryEvent from "./events/inventoryEvent";
 import level1 from "../levels/level1";
+import AverageOnly from "./items/equipment/averageOnly";
 
 
 class GameState {
@@ -33,7 +34,10 @@ class GameState {
 	}
 
 	static initialGameState() : GameState {
-		return new GameState([level1]);
+		let gameState = new GameState([level1]);
+		gameState.inventory.push(new AverageOnly());
+		gameState.equipDice(new AverageOnly(), DICE.d4);
+		return gameState;
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {
