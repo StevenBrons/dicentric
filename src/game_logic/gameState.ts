@@ -35,9 +35,6 @@ class GameState {
 
 	static initialGameState() : GameState {
 		let gameState = new GameState([level1, level3]);
-		const eqp = new AverageOnly();
-		gameState.inventory.push(eqp);
-		gameState.equipDice(eqp, DICE.d20);
 		return gameState;
 	}
 
