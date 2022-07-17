@@ -7,6 +7,7 @@ import DialogueEvent from "../game_logic/events/dialogueEvent";
 import Enemy from "../game_logic/events/enemies/enemy";
 import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
 import PlusOne from "../game_logic/items/equipment/plusOne";
+import OnlyEven from "../game_logic/items/equipment/onlyEven";
 
 //construct shops
 let shop = new ShopEvent([{item: new Dice(DICE.d4), price: 1, sold: false}
@@ -22,7 +23,7 @@ let bird = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(D
 let cube = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10),new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
 
 //construct boss
-let boss = new Enemy(50, "", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [], "Congratulations! You defeated the boss and completed the tutorial level");
+let boss = new Enemy(50, "", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [new OnlyEven()], "Congratulations! You defeated the boss and completed the tutorial level. You got a new equipment!");
 
 //construct battles
 let battle1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird); 

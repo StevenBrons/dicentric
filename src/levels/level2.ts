@@ -13,7 +13,7 @@ import ExcludeOne from "../game_logic/items/equipment/excludeOne";
 //construct shops
 let shopstart = new ShopEvent([{item: new MinusOne(), price: 2, sold: false}
 	, {item: new ExcludeOne(), price: 2, sold: false}
-	, {item: new Dice(DICE.d20), price: 3, sold: false}
+	, {item: d20(), price: 3, sold: false}
 	, {item: new Dice(DICE.d8), price: 4, sold: false}
 	, {item: new Dice(DICE.d10), price: 4, sold: false}
 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
@@ -22,24 +22,23 @@ shopstart.description = "Welcome to the shop! There are some rare equipments in 
 let shopboss1 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
 let shopboss2 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
 
-//construct enemies
-let bird1 = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let bird2 = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let bird3 = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let bird4 = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let cube1 = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d12), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
-let cube2 = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d12), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
-let cube3 = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d12), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
-let ninja1 = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let ninja2 = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let ninja3 = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+//construct battles
+let bird1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
+let bird2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
+let bird3 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
+let bird4 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
+let cube1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
+let cube2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
+let cube3 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
+let ninja1 = constructNinja();
+let ninja2 = constructNinja();
+let ninja3 = constructNinja();
+
 
 //construct boss
-let boss = new Enemy(100, "", [new Dice(DICE.d4), new Dice(DICE.d8), new Dice(DICE.d8)], [], "Congratulations! You defeated the boss and completed the tutorial level");
+let boss = new Enemy(100, "", [d4(), d8(), d8()], [], "Congratulations!");
 
 //construct battles
-let battle1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird1); 
-let battle2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube1);
 let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
 
 //construct dialogue events
@@ -99,4 +98,16 @@ function d12() : Dice {
 
 function d20() : Dice {
 	return new Dice(DICE.d20);
+}
+
+function constructBird() {
+	return new Enemy(10, "", [d4(), d4()], [d6(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+}
+
+function constructCube() {
+	return new Enemy(15, "", [d4(), d6()], [d6(), d8(), d8(), d10(), d12(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)")
+}
+
+function constructNinja() {
+	return new Enemy(20, "", [d4(), d4(), d4(), d4()], [d4(), d4(), d4(), d4(), d6(), d8(), d10(), d10(), d20()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d4 x 4, d6 x 2, d8 x 1, d10 x 2, d20 x 1)");
 }

@@ -7,6 +7,7 @@ import MapNode from "./mapNode";
 import Level from "./level";
 import Dice, { DICE } from "./items/dice";
 import InventoryEvent from "./events/inventoryEvent";
+import level1 from "../levels/level1";
 
 
 class GameState {
@@ -28,6 +29,10 @@ class GameState {
 		this.lives = 100; //start levens??
 		this.equipment = new EquipState();
 		this.eventState = levels[0].map.startNode.event;
+	}
+
+	static initialGameState() : GameState {
+		return new GameState([level1]);
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {
