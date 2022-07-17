@@ -19,8 +19,8 @@ let shop = new ShopEvent([{item: new Dice(DICE.d4), price: 1, sold: false}
 shop.description = "Welcome to the shop! You can roll some dice to get an amount to spend. Then, you can select items to buy them." 
 
 //construct enemies
-let bird = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-let cube = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10),new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
+let bird = new Enemy(10, "bird", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+let cube = new Enemy(15, "cube", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10),new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
 
 //construct boss
 let boss = new Enemy(50, "", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [new OnlyEven()], "Congratulations! You defeated the boss and completed the tutorial level. You got a new equipment!");
@@ -54,7 +54,11 @@ let node1 = new MapNode([node2],64,80,0,tutorialDialogue,true,"island_event");
 //construct map
 let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "./res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
 
+const OP = (new Array(100).fill(1)).map(x => new Dice(DICE.d20));
+
 //construct level
-let level1 = new Level(1, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
+let level1 = new Level(1, map, 
+	[new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)].concat(OP)
+);
 
 export default level1;

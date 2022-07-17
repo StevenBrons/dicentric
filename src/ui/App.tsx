@@ -21,6 +21,8 @@ function getScreen(gameEvent: GameEvent | null) {
       return <Battle />
     case "Dialogue":
       return <Dialogue />
+    case "Inventory":
+      return <Inventory />
     default:
       return null;
   }
@@ -28,12 +30,16 @@ function getScreen(gameEvent: GameEvent | null) {
 
 type GameContext = [GameState, () => void, number];
 
-export const gameContext = React.createContext<GameContext>([new GameState(level1), () => {}, 0])
+export const gameContext = React.createContext<GameContext>([new GameState([level1,level1]), () => {}, 0])
 
 function App() {
   
-  const [gameState, setGameState] = useState(new GameState(level1));
+  const [gameState, setGameState] = useState(new GameState([level1,level1]));
   const [updateNumber, setUpdateNumber] = useState(0);
+
+  const showScreen = gameState.eventState;
+  const screenName = showScreen ? gameState.eventState?.name : 
+    (gameState.previousEventName === "Inventory" ? "hidden2" : "hidden1");
 
   function updateGameState() {
     setGameState(gameState);
@@ -45,35 +51,38 @@ function App() {
       <gameContext.Provider value={[gameState, updateGameState, updateNumber]}>
         <MapLayer />
         <div className="MenuLayer">
-          <div className={`Screen ${gameState.eventState ? gameState.eventState.name : "hidden"}`}>
+          <div className={`Screen ${screenName}`}>
             {getScreen(gameState.eventState)}
           </div>
           <Tray />
-          { gameState.eventState ? <RollButton /> : <div />}
+          <MainButton />
         </div>
       </ gameContext.Provider>
     </DndProvider>
   );
 }
 
-const RollButton = () => {
+const MainButton = () => {
 
   const [gameState, update] = useContext(gameContext);
   const [isDown, setDown] = useState(false);
-  const canRoll = gameState.eventState?.canRoll();
+
+  const text = gameState.getButtonText();
+  const enabled = gameState.canPress();
+  const onClick = () => {
+    if (enabled) {
+      gameState.pressButton();
+      update();
+    }
+  }
 
   return <div
-    className={`RollButton ${isDown && canRoll ? "down" : "up"} ${canRoll ? "enabled" : "disabled"}`}
+    className={`MainButton ${isDown && enabled ? "down" : "up"} ${enabled ? "enabled" : "disabled"}`}
     onMouseDown={() => setDown(true)}
     onMouseUp={() => setDown(false)}
-    onClick={() => {
-      if (canRoll) {
-        gameState.eventState?.rollDice(gameState);
-        update();
-      }}
-    } 
+    onClick={onClick} 
   >
-    Roll
+    {text}
   </div>
 }
 

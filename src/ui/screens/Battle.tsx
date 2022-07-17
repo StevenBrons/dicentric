@@ -10,8 +10,21 @@ const Battle = () => {
 	const battle = gameState.eventState as BattleEvent;
 
 	return <Screen name="Battle">
-		{battle.enemy.health}
-		{gameState.lives}
+		<div className="Background">
+			<div id="yourHealth" className="Indicator">
+				<img src="./res/heart.png"/>
+				{gameState.lives}
+			</div>
+			<div id="enemyHealth" className="Indicator">
+				{battle.enemy.health}
+				<img src="./res/heart.png"/>
+			</div>
+			<div id="enemyDice" className="Indicator">
+			</div>
+			<div id="enemy">
+				<img src={`./res/enemies/${battle.enemy.image}.png`}/>
+			</ div>
+		</div>
 	</Screen>
 }
 

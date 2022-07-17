@@ -1,49 +1,49 @@
-import MapState from "../game_logic/mapState";
-import Level from "../game_logic/level"
-import Dice, { DICE } from "../game_logic/items/dice";
-import MapNode from "../game_logic/mapNode";
-import ShopEvent from "../game_logic/events/shopEvent";
-import DialogueEvent from "../game_logic/events/dialogueEvent";
-import Enemy from "../game_logic/events/enemies/enemy";
-import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
-import PlusOne from "../game_logic/items/equipment/plusOne";
-import MinusOne from "../game_logic/items/equipment/minusOne";
-import ExcludeOne from "../game_logic/items/equipment/excludeOne";
+// import MapState from "../game_logic/mapState";
+// import Level from "../game_logic/level"
+// import Dice, { DICE } from "../game_logic/items/dice";
+// import MapNode from "../game_logic/mapNode";
+// import ShopEvent from "../game_logic/events/shopEvent";
+// import DialogueEvent from "../game_logic/events/dialogueEvent";
+// import Enemy from "../game_logic/events/enemies/enemy";
+// import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
+// import PlusOne from "../game_logic/items/equipment/plusOne";
+// import MinusOne from "../game_logic/items/equipment/minusOne";
+// import ExcludeOne from "../game_logic/items/equipment/excludeOne";
 
-//construct shops
-let shopstart = new ShopEvent([{item: new MinusOne(), price: 2, sold: false}
-	, {item: new ExcludeOne(), price: 2, sold: false}
-	, {item: d20(), price: 3, sold: false}
-	, {item: new Dice(DICE.d8), price: 4, sold: false}
-	, {item: new Dice(DICE.d10), price: 4, sold: false}
-	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
-shopstart.description = "Welcome to the shop! There are some rare equipments in stock. Be aware that you can't remove an equipment, unless you put another equipment over it, but then you won't get it back!";
+// //construct shops
+// let shopstart = new ShopEvent([{item: new MinusOne(), price: 2, sold: false}
+// 	, {item: new ExcludeOne(), price: 2, sold: false}
+// 	, {item: d20(), price: 3, sold: false}
+// 	, {item: new Dice(DICE.d8), price: 4, sold: false}
+// 	, {item: new Dice(DICE.d10), price: 4, sold: false}
+// 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
+// shopstart.description = "Welcome to the shop! There are some rare equipments in stock. Be aware that you can't remove an equipment, unless you put another equipment over it, but then you won't get it back!";
 
-let shopboss1 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
-let shopboss2 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
+// let shopboss1 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
+// let shopboss2 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
 
 //construct boss
 let boss = new Enemy(100, "", [d20()], [], "Congratulations!");
 
-//construct battles
-let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
+// //construct battles
+// let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
 
-//construct dialogue events
-let DialogueStart = new DialogueEvent([{text : "Search thoroughly, roll higher than 4 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>4?{succes : true, text : "You found some dice! \n d4 was added to your inventory. \n d4 was added to your inventory. \n d6 was added to you inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}
-	, {text : "Search for a bit, roll higher than 2 to succed", slots : 1, effect : {succes: (n: number)=>{return n>2?{succes : true, text : "You found a die! \n d6 was added to your inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6)]}}]
-	, "Welcome to Dicentric! You will move accross islands. Dice are used for every action. Your rolls determine the outcome. There seems to be something in the grass. Search the grass? You can choose not to by closing the window");
+// //construct dialogue events
+// let DialogueStart = new DialogueEvent([{text : "Search thoroughly, roll higher than 4 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>4?{succes : true, text : "You found some dice! \n d4 was added to your inventory. \n d4 was added to your inventory. \n d6 was added to you inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}
+// 	, {text : "Search for a bit, roll higher than 2 to succed", slots : 1, effect : {succes: (n: number)=>{return n>2?{succes : true, text : "You found a die! \n d6 was added to your inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6)]}}]
+// 	, "Welcome to Dicentric! You will move accross islands. Dice are used for every action. Your rolls determine the outcome. There seems to be something in the grass. Search the grass? You can choose not to by closing the window");
 
-let Dialogue1 = new DialogueEvent([]
-	, "There are some enemies up ahead. The creature pictured on the sign pointing up looks stronger than on the sign pointing down. Maybe it has a higher reward though?");
+// let Dialogue1 = new DialogueEvent([]
+// 	, "There are some enemies up ahead. The creature pictured on the sign pointing up looks stronger than on the sign pointing down. Maybe it has a higher reward though?");
 
-let Dialogue2 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
+// let Dialogue2 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
+// 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
 
-let Dialogue3 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
+// let Dialogue3 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
+// 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
 
-let Dialogue4 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
-	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
+// let Dialogue4 = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
+// 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
 
 
 //construct eventpool and battles
@@ -81,29 +81,29 @@ let level2 = new Level(2, map, [d4(), d4(), d4(), d4(), d4(), d6(), d6(), d6(), 
 
 export default level2;
 
-function d4() : Dice {
-	return new Dice(DICE.d4);
-}
+// function d4() : Dice {
+// 	return new Dice(DICE.d4);
+// }
 
-function d6() : Dice {
-	return new Dice(DICE.d6);
-}
+// function d6() : Dice {
+// 	return new Dice(DICE.d6);
+// }
 
-function d8() : Dice {
-	return new Dice(DICE.d8);
-}
+// function d8() : Dice {
+// 	return new Dice(DICE.d8);
+// }
 
-function d10() : Dice {
-	return new Dice(DICE.d10);
-}
+// function d10() : Dice {
+// 	return new Dice(DICE.d10);
+// }
 
-function d12() : Dice {
-	return new Dice(DICE.d12);
-}
+// function d12() : Dice {
+// 	return new Dice(DICE.d12);
+// }
 
-function d20() : Dice {
-	return new Dice(DICE.d20);
-}
+// function d20() : Dice {
+// 	return new Dice(DICE.d20);
+// }
 
 function constructBirdEvent() {
 	let bird = new Enemy(10, "", [d4(), d4()], [d6(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");

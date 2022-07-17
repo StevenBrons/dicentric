@@ -23,14 +23,19 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 	}
 
 	return <div className={`ItemSlot ${canDrag ? "dragable" : ""} ${onClick ? "clickable" : ""} ${slotType}`}>
-		<div
-			draggable={canDrag ? "true" : "false"}
-			className="Item"
-			data-tip="React-tooltip"
-			style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}}
-			ref={canDrag ? dragRef : null}
-			onClick={onClick ? onClick : () => {}}
-		/>
+		<div className="tooltip">
+			<div
+				draggable={canDrag ? "true" : "false"}
+				className="Item"
+				data-tip="React-tooltip"
+				style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}}
+				ref={canDrag ? dragRef : null}
+				onClick={onClick ? onClick : () => {}}
+			/>
+			<span className="tooltiptext">
+				{item.description}
+			</span>
+		</div>
 	</div>
 
 }

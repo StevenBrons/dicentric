@@ -7,7 +7,8 @@
 	padding: 45px;
 	pointer-events: all;
 	display: grid;
-	grid-template-rows: 15% auto min-content;
+	grid-template-rows: 15% min-content auto min-content;
+	gap: 20px;
 	grid-template-columns: 1fr;
 	align-items: stretch;
 	justify-content: space-between;
@@ -19,19 +20,33 @@
 	transition-duration: 1s;
 }
 
-.Screen.hidden {
-	transform: translateY(110vh);
+.Screen.hidden1 {
+	transform: translate(0px, 110vh);
+	grid-row-start: event_c1;
+	grid-row-end: event_c1;
+	grid-column-start: event_c1;
+	grid-column-end: event_c2;
+	transition-delay: 0s;
+}
+
+.Screen.hidden2 {
+	transform: translate(0px, 110vh);
+	grid-row-start: event_c2;
+	grid-row-end: event_c2;
+	grid-column-start: event_c2;
+	grid-column-end: event_c2;
 	transition-delay: 0s;
 }
 
 .Screen h1 {
-	margin-bottom: 20px;
+	margin: auto;
+	margin-left: 5px;
 }
 
 .Screen .Actions {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: end;
 	align-items: flex-end;
 }
 
@@ -51,6 +66,10 @@
 
 .ActionBar.disabled {
 	filter: opacity(20%);
+}
+
+.ActionBar.hasActivated {
+	filter: opacity(100%) !important;
 }
 
 .ActionBar.enabled:hover {

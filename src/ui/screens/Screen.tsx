@@ -25,18 +25,17 @@ const Screen : FC<Props> = ({name, children}) => {
 		<div className="Actions">
 			{event.actions.map((a, i) => <ActionBar index={i} key={i} />)}
 		</div>
-		{ gameState.eventState?.closable ? <CloseButton /> : <div />}
+		{ gameState.eventState?.closable ? <CloseButton /> : <></>}
 	</>
 }
 
-const CloseButton = () => {
+export const CloseButton = () => {
 
   const [gameState, update] = useContext(gameContext);
   const [isDown, setDown] = useState(false);
-  const canRoll = gameState.eventState?.canRoll();
 
   return <div
-    className={`CloseButton ${isDown && canRoll ? "down" : "up"}`}
+    className={`CloseButton ${isDown ? "down" : "up"}`}
     onMouseDown={() => setDown(true)}
     onMouseUp={() => setDown(false)}
     onClick={() => {
