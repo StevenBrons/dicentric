@@ -24,7 +24,7 @@ const Node : FC<NodeProps> = ({pos: {x, y}, pixelSize, onClick, canTravel}) => {
 	return <div
 		className={`Node ${canTravel ? "CanTravel" : ""}`}
 		style={{left: `${x * pixelSize}px`, top: `${y * pixelSize}px`}}
-		onClick={onClick}
+		onClick={canTravel ? onClick : () => {}}
 	>
 	</div>
 }

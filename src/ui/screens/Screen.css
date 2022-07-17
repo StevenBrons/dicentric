@@ -16,9 +16,16 @@
 	width: 100%;
 	height: auto;
 	display: grid;
-	grid-template-columns: 1fr 40%;
+	padding: 20px;
+	grid-template-columns: 1fr 40% 150px;
 	grid-template-rows: 1fr;
 	background-color: orange;
+}
+
+.ActionBar .Sum {
+	display: flex;
+	align-items: center;
+	font-size: 30px;
 }
 
 .ActionBar:hover {
@@ -29,17 +36,13 @@
 	margin: auto;
 }
 
-.ActionBar .ItemGroup {
-}
-
 .ItemGroup {
 	height: 100%;
 	display: inline-block;
-}
-
-.ItemGroup .inner {
-	display: grid;
+	display: flex;
 	height: 100%;
 	flex-direction: row;
 	justify-content: space-around;
+	display: flex;
+	align-items: center;
 }

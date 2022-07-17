@@ -15,22 +15,20 @@ const Shop : FC<Props> = ({ shopEvent }) => {
 	const [gameState, update] = useContext(gameContext);
 
 	const stock = shopEvent.stock.map((item, i) => <div key={i}>
-		<ItemSlot item={item.sold ? null : item.item} placeHolder={item.item.image}/>
+		<ItemSlot
+			item={shopEvent.rolled ? (shopEvent.canBuy(i) ? item.item : null) : item.item}
+			placeHolder={item.item.image}
+			canDrag={false}
+			onClick={() => {shopEvent.buy(i, gameState); update()}}
+		/>
 		<span>
 			{item.price}
 		</span>
 		</div>)
 	return <Screen name="Shop">
-		<h1>
-			Shop
-		</h1>
-		<div>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas efficitur ullamcorper tincidunt.
-		</div>
 		<div className="Stock">
 			{stock}
 		</div>
-		{shopEvent.actions.map((a, i) => <ActionBar index={i} key={i} />)}
 	</Screen>
 }
 
