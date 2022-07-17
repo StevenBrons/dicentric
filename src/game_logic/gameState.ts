@@ -19,6 +19,7 @@ class GameState {
 	lives: number;
 	equipment: EquipState;
 	eventState: GameEvent | null;  
+	previousEventName: string = "";
 
 	constructor(levels: Level[]) {
 		this.mapState = levels[0].map;
@@ -91,6 +92,7 @@ class GameState {
 		if(this.eventState === null) { 
 			return;
 		}
+		this.previousEventName = this.eventState.name;
 		if(this.eventState.lastSelectedOption !== -1) {
 			for(let i = 0; i< this.eventState.selectedDice[this.eventState.lastSelectedOption].length; i++) {
 				this.inventory.push(this.eventState.selectedDice[this.eventState.lastSelectedOption][i]);
