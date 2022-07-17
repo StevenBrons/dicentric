@@ -7,9 +7,9 @@ class AverageOnly extends Equipment {
 
     rollWithEq(d: DICE): number {
         if(Math.random() < 0.5) {
-            return Math.floor(d+1/2);
+            return Math.floor((d+1)/2);
         }
-        return Math.ceil(d+1/2);
+        return Math.ceil((d+1)/2);
     }
 }
 
