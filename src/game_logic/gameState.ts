@@ -9,6 +9,7 @@ import Dice, { DICE } from "./items/dice";
 import InventoryEvent from "./events/inventoryEvent";
 import level1 from "../levels/level1";
 import AverageOnly from "./items/equipment/averageOnly";
+import level3 from "../levels/level3";
 
 class GameState {
 	mapState: MapState;
@@ -27,13 +28,13 @@ class GameState {
 		this.inventoryStartLevel = levels[0].startInventory;
 		this.level = 0;
 		this.levels = levels;
-		this.lives = 100; //start levens??
+		this.lives = 50; //start levens??
 		this.equipment = new EquipState();
 		this.eventState = levels[0].map.startNode.event;
 	}
 
 	static initialGameState() : GameState {
-		let gameState = new GameState([level1]);
+		let gameState = new GameState([level1, level3]);
 		const eqp = new AverageOnly();
 		gameState.inventory.push(eqp);
 		gameState.equipDice(eqp, DICE.d20);
@@ -117,14 +118,14 @@ class GameState {
 		this.mapState = this.levels[this.level].map;
 		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(this.levels[this.level].startInventory);
 		this.inventoryStartLevel = this.inventory;
-		this.lives = 100; //of oude hoeveelheid levens???
+		this.lives = 50; //of oude hoeveelheid levens???
 		this.eventState = this.levels[this.level].map.startNode.event;
 	}
 
 	resetLevel() : void{
 		this.mapState.resetMap();
 		this.inventory = this.inventoryStartLevel;
-		this.lives = 100;
+		this.lives = 50;
 		this.eventState = this.mapState.startNode.event;
 	}
 

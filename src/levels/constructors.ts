@@ -27,13 +27,13 @@ export const d20 = () : Dice => {
 }
 	
 export const constructBirdEvent = () => {
-	let bird = new Enemy(10, "", [d4(), d4()], [d6(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+	let bird = new Enemy(10, "bird", [d4(), d4()], [d4(), d4(), d6(), d8(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d4 x 2, d6 x 1, d8 x 2, d10 x 2, d12 x 1)");
 	let event = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird);
 	return {event: event, image: "island_enemy_bird"}
 }
 	
 export const constructCubeEvent = () => {
-	let cube = new Enemy(15, "", [d4(), d6()], [d6(), d8(), d8(), d10(), d12(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
+	let cube = new Enemy(15, "cube", [d4(), d6()], [d4(), d4(), d6(), d8(), d8(), d8(), d10(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d4 x 2, d6 x 2, d8 x 3, d10 x 3, d12 x 1)");
 	let event = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube);
 	return {event: event, image: "island_enemy_cube"}
 }

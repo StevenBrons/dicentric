@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import GameEvent from "./events/gameEvent";
 import MapNode from "./mapNode";
 
@@ -9,6 +10,7 @@ class MapState {
     eventPool : {event: (GameEvent|null), image: string}[];
     image : string;
     mapSize : {width : number, height : number};
+    originalmap : MapNode[];
 
     constructor(map : MapNode[], eventPool : {event: (GameEvent|null), image: string}[], image : string, mapSize : {width : number, height : number}) {
         if(map.length === 0) {
@@ -22,6 +24,7 @@ class MapState {
         this.location = this.startNode;
         this.image = image;
         this.mapSize = mapSize;
+        this.originalmap = cloneDeep(map);
     }
 
     setLocation(node: MapNode) : void {
@@ -29,6 +32,8 @@ class MapState {
     }
 
     resetMap() : void {
+        this.map = this.originalmap;
+        this.originalmap = cloneDeep(this.originalmap);
         this.randomizeMap();
         this.location = this.startNode;
     }
