@@ -22,7 +22,7 @@ let enemy1 = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice
 let enemy2 = new Enemy(25, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d12), new Dice(DICE.d12)]);
 
 //construct boss
-let boss = new Enemy(70, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)]);;
+let boss = new Enemy(70, "", [new Dice(DICE.d4), new Dice(DICE.d4)], []);;
 
 //construct battles
 let battle1 = new BattleEvent([{text : "attack", slots: 2, effect: BATTLE_ACTION.attack}], enemy1); //todo: actions aanpassen?
@@ -32,12 +32,11 @@ let bossbattle = new BattleEvent([{text : "attack", slots: 2, effect: BATTLE_ACT
 //construct dialogue events
 let tutorialDialogue = new DialogueEvent([{text : "Search thoroughly, roll higher than 4 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>4?{succes : true, text : "You found some dice!"}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}
 	, {text : "Search for a bit, roll higher than 2 to succed", slots : 1, effect : {succes: (n: number)=>{return n>2?{succes : true, text : "You found a die!"}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6)]}}]
-	, "There is a sign it says: \"Welcome to Dicentric! insert speluitleg. Dice are used for every action. Your rolls determine the outcome\". There seems to be something behind the sign. Search behind the sign? You can choose not to by closing the window");
+	, "insert speluitleg. Dice are used for every action. Your rolls determine the outcome. There seems to be something in the grass. Search the grass? You can choose not to by closing the window");
 
 //TODO, up is the harder enemy
-let junctionDialogue = new DialogueEvent([{text : "Nah", slots : 0, effect : {succes: (n: number)=>{return {succes: true, text : "You move on."}}, rewards: []}}
-	,{text : "Search, roll higher than 5 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>=5?{succes : true, text : "You found some dice!"}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}]
-	, "There is a sign it says: \"Welcome to Dicentric! insert speluitleg. Dice are used for every action. Your rolls determine the outcome\". There seems to be something behind the sign. Search behind the sign?");
+let junctionDialogue = new DialogueEvent([]
+	, "There is ");
 
 let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any number to succeed", slots : 1, effect : {succes: (n: number)=>{return {succes: true, text : "You found an equipment. Open the equipment menu to equip it!"}}, rewards: [new PlusOne()]}}]
 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");

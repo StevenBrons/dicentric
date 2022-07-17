@@ -36,6 +36,10 @@ class ShopEvent extends GameEvent {
     getSpendable():number {
         return this.rollResultSum;
     }
+
+    canBuy(index : number) : boolean {
+        return this.rollResultSum >= this.stock[index].price;
+    }
 }
 
 export default ShopEvent;
