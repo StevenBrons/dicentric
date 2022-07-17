@@ -2,6 +2,7 @@ import { DICE } from "../dice";
 import Equipment from "../equipment";
 
 class OnlyEven extends Equipment {
+    image: string = "onlyEven";
     description: string = "Only roll even numbers.";        
 
     rollWithEq(d: DICE): number {
