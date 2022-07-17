@@ -7,15 +7,17 @@ import DialogueEvent from "../game_logic/events/dialogueEvent";
 import Enemy from "../game_logic/events/enemies/enemy";
 import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
 import PlusOne from "../game_logic/items/equipment/plusOne";
+import MinusOne from "../game_logic/items/equipment/minusOne";
+import ExcludeOne from "../game_logic/items/equipment/excludeOne";
 
 //construct shops
-let shop1 = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
-	, {item: new Dice(DICE.d4), price: 2, sold: false}
+let shopstart = new ShopEvent([{item: new MinusOne(), price: 2, sold: false}
+	, {item: new ExcludeOne(), price: 2, sold: false}
 	, {item: new Dice(DICE.d6), price: 3, sold: false}
 	, {item: new Dice(DICE.d8), price: 4, sold: false}
 	, {item: new Dice(DICE.d10), price: 4, sold: false}
 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
-shop1.description = "Welcome to the shop! I sell some equip";
+shopstart.description = "Welcome to the shop! There are some rare equipments in stock. Be aware that you can't remove an equipment, unless you put another equipment over it, but then you won't get it back!";
 
 //construct enemies
 let bird = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");
@@ -42,18 +44,18 @@ let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any
 
 
 //construct nodes
-let node7 = new MapNode([],439,80,5,bossbattle,true,"island_boss");
-let node6 = new MapNode([node7],352,80,4,equipmentDialogue,true,"island_event");
-let node5 = new MapNode([node6],233,128,3,battle1,true,"island_enemy_bird");
-let node4 = new MapNode([node6],288,32,3,battle2,true,"island_enemy_cube");
-let node3 = new MapNode([node4, node5],224,80,2,junctionDialogue,true,"island_event");
-let node2 = new MapNode([node3],144,80,1,shop1,true,"island_shop");
-let node1 = new MapNode([node2],64,80,0,tutorialDialogue,true,"island_event");
+// let node7 = new MapNode([],439,80,5,bossbattle,true,"island_boss");
+// let node6 = new MapNode([node7],352,80,4,equipmentDialogue,true,"island_event");
+// let node5 = new MapNode([node6],233,128,3,battle1,true,"island_enemy_bird");
+// let node4 = new MapNode([node6],288,32,3,battle2,true,"island_enemy_cube");
+// let node3 = new MapNode([node4, node5],224,80,2,junctionDialogue,true,"island_event");
+// let node2 = new MapNode([node3],144,80,1,shop1,true,"island_shop");
+// let node1 = new MapNode([node2],64,80,0,tutorialDialogue,true,"island_event");
 
-//construct map
-let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "./res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
+// //construct map
+// let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "./res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
 
-//construct level
-let level2 = new Level(2, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
+// //construct level
+// let level2 = new Level(2, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
 
-export default level2;
+//export default level2;

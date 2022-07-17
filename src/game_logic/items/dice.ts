@@ -18,7 +18,7 @@ class Dice extends Item {
 		super();
 		this.image = Dice.getImage(d)
 		this.type = d;
-		this.description = "Die that rolls the numbers 1 through" + d;
+		this.description = "Die that rolls the numbers 1-" + d + ".";
 	}
 
 	static getImage(d: DICE) {

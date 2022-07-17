@@ -22,7 +22,7 @@ class GameState {
 		this.inventory = level.startInventory; 
 		this.inventoryStartLevel = level.startInventory;
 		this.level = level.number;
-		this.lives = 200; //start levens??
+		this.lives = 100; //start levens??
 		this.equipment = new EquipState();
 		this.eventState = level.map.startNode.event;
 	}
@@ -100,15 +100,19 @@ class GameState {
 		this.level = level.number;
 		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(level.startInventory);
 		this.inventoryStartLevel = this.inventory;
-		this.lives = 200; //of oude hoeveelheid levens???
+		this.lives = 100; //of oude hoeveelheid levens???
 		this.eventState = level.map.startNode.event;
 	}
 
 	resetLevel() : void{
 		this.mapState.resetMap();
 		this.inventory = this.inventoryStartLevel;
-		this.lives = 200;
+		this.lives = 100;
 		this.eventState = this.mapState.startNode.event;
+	}
+
+	levelCompleted() : boolean {
+		return this.eventState === null && this.mapState.location === this.mapState.endNode;
 	}
 }
 

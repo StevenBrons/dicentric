@@ -9,20 +9,20 @@ import BattleEvent, { BATTLE_ACTION } from "../game_logic/events/battleEvent";
 import PlusOne from "../game_logic/items/equipment/plusOne";
 
 //construct shops
-let shop = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
+let shop = new ShopEvent([{item: new Dice(DICE.d4), price: 1, sold: false}
 	, {item: new Dice(DICE.d4), price: 2, sold: false}
-	, {item: new Dice(DICE.d6), price: 3, sold: false}
-	, {item: new Dice(DICE.d8), price: 4, sold: false}
-	, {item: new Dice(DICE.d10), price: 4, sold: false}
-	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
+	, {item: new Dice(DICE.d6), price: 2, sold: false}
+	, {item: new Dice(DICE.d8), price: 3, sold: false}
+	, {item: new Dice(DICE.d10), price: 3, sold: false}
+	, {item: new Dice(DICE.d12), price: 4, sold: false}]);
 shop.description = "Welcome to the shop! You can roll some dice to get an amount to spend. Then, you can select items to buy them." 
 
 //construct enemies
-let bird = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");
-let cube = new Enemy(25, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d12), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");
+let bird = new Enemy(10, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+let cube = new Enemy(15, "", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d8), new Dice(DICE.d10),new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
 
 //construct boss
-let boss = new Enemy(70, "", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [], "Congratulations! You defeated the boss and completed the tutorial level");
+let boss = new Enemy(50, "", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [], "Congratulations! You defeated the boss and completed the tutorial level");
 
 //construct battles
 let battle1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird); 
