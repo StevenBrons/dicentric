@@ -1,32 +1,32 @@
-import GameEvent from "./gameEvent";
+import GameEvent, { GameAction } from "./gameEvent";
 import Dice from "../items/dice";
 import Item from "../items/item";
 import GameState from "../gameState";
 
 class DialogueEvent extends GameEvent {
-    selectedDice: { dice: Dice[]; text: string; }[];
-    nrDiceSlots: number[];
+	actions: GameAction[];
+    selectedDice: Dice[][];
     name: string;
-		options: {succes: (n: number) => boolean, rewards: Item[]}[];
+	dialogueActions: {succes: (n: number) => boolean, rewards: Item[]}[];
 
-    constructor(options: {text: string, slots: number, effect: {succes: (n: number) => boolean, rewards: Item[]}}[]) { //effects implementeren
-        super(options.length);
-		this.options = []; 
+    constructor(actions: {text: string, slots: number, effect: {succes: (n: number) => boolean, rewards: Item[]}}[]) { //effects implementeren
+        super(actions.length);
+		this.actions = []; 
 		this.selectedDice = [];
-		this.nrDiceSlots = [];
-		for(let i = 0; i<options.length; i++) {
-			this.options.push(options[i].effect);
-			this.selectedDice.push({dice: [], text: options[i].text});
-			this.nrDiceSlots.push(options[i].slots); 
+		this.dialogueActions = [];
+		for(let i = 0; i<actions.length; i++) {
+			this.actions.push({nrDiceSlots : actions[i].slots, text : actions[i].text});
+			this.selectedDice.push([]);
+			this.dialogueActions.push(actions[i].effect); 
 		}
         this.name = "Dialogue";
     }
 
-	performOption(option: number, gameState : GameState) {
+	rollDice(option: number, gameState: GameState): boolean {
 		//returns true upon succes
-		this.rollDice(gameState.equipment, option);
-		if(this.options[option].succes(this.rollResultSum)) {
-			gameState.addToInventory(this.options[option].rewards);
+		super.rollDice(option, gameState);
+		if(this.dialogueActions[option].succes(this.rollResultSum)) {
+			gameState.addToInventory(this.dialogueActions[option].rewards);
 			gameState.endEvent();
 			return true;
 		}

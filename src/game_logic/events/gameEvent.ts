@@ -1,12 +1,15 @@
 import Dice from "../items/dice";
-import EquipState from "../equipState";
-import Item from "../items/item";
 import GameState from "../gameState";
+
+export type GameAction = {
+    nrDiceSlots : number, 
+    text : string
+}
 
 abstract class GameEvent {
     abstract name : string;
-    abstract selectedDice : {dice: Dice[], text: string}[];
-    abstract nrDiceSlots : number[];
+    abstract selectedDice : Dice[][];
+    abstract actions : GameAction[];
     nrOptions : number; 
     rollResult: number[];
     rollResultSum: number;
@@ -22,23 +25,23 @@ abstract class GameEvent {
         }
     }
     //TODO IN SHOPEVENT ETC OVERWRITTEN EN SUPER AANROEPEN
-    rollDice(eqs: EquipState, option: number) {
+    rollDice(option: number, gameState : GameState) {
         if(this.rolled) {
             //already rolled
             return;
         }
         this.rolled = true;
-        this.rollResult = this.selectedDice[option].dice.map(d => d.roll(eqs.getDiceEquipment(d.type)));
+        this.rollResult = this.selectedDice[option].map(d => d.roll(gameState.equipment.getDiceEquipment(d.type)));
         this.rollResultSum = this.rollResult.reduce((accumulator, current) => {
             return accumulator + current;
           }, 0);
         //remove dice
-		this.selectedDice[option].dice = [];
+		this.selectedDice[option] = [];
     }
 
     selectDice(d: Dice, option: number, gameState: GameState) {
         //is there space to select
-        if(this.selectedDice[option].dice.length >= this.nrDiceSlots[option]){
+        if(this.selectedDice[option].length >= this.actions[option].nrDiceSlots){
             throw new Error("trying to select dice while there is no space");
         }
         //is the die available to select
@@ -48,19 +51,18 @@ abstract class GameEvent {
         //remove from inventory and select
         let i = gameState.inventory.indexOf(d);
 		gameState.inventory.splice(i, 1);
-        this.selectedDice[option].dice.push(d);
+        this.selectedDice[option].push(d);
     }
 
-    //todo overal inventory vervangen door gamestate
-    deselectDice(d: Dice, option: number, inventory: Item[]) {
+    deselectDice(d: Dice, option: number, gameState: GameState) {
         //is the dice selected?
-        if(!this.selectedDice[option].dice.includes(d)) {
+        if(!this.selectedDice[option].includes(d)) {
 			throw new Error("trying to deselect dice which is not selected");
 		}
         //remove from selection and add to inventory
-        let i = this.selectedDice[option].dice.indexOf(d);
-		this.selectedDice[option].dice.splice(i, 1);
-        inventory.push(d);
+        let i = this.selectedDice[option].indexOf(d);
+		this.selectedDice[option].splice(i, 1);
+        gameState.inventory.push(d);
     }
 }
 

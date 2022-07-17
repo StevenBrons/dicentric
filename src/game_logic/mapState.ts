@@ -1,3 +1,4 @@
+import GameEvent from "./events/gameEvent";
 import MapNode from "./mapNode";
 
 class MapState {
@@ -28,6 +29,11 @@ class MapState {
         this.location = this.startNode;
     }
 
+    getEvent() : GameEvent|null{
+        return this.location.event;
+    }
+
+    //todo: moet uit een grotere pool
     randomizeMap() : void {
         let events = [];
         //add all events to randomize (including nulls) to array events
