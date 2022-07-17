@@ -16,6 +16,7 @@ abstract class GameEvent {
     rollResult: number[];
     rollResultSum: number;
     rolled : boolean;
+    lastSelectedOption : number = -1;
     selectedOption : number = -1;
     nrOfDiceSelected : number = 0;
 
@@ -42,6 +43,7 @@ abstract class GameEvent {
           }, 0);
         //remove dice
 		this.selectedDice[this.selectedOption] = [];
+        this.selectedOption = -1;
     }
 
     selectDice(d: Dice, option: number, gameState: GameState) {
@@ -58,6 +60,7 @@ abstract class GameEvent {
         }
         //remove from inventory and select
         this.selectedOption = option;
+        this.lastSelectedOption = option;
         let i = gameState.inventory.indexOf(d);
 		gameState.inventory.splice(i, 1);
         this.selectedDice[option].push(d);
