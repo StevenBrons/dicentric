@@ -33,7 +33,7 @@ export const gameContext = React.createContext<GameContext>([new GameState(level
 
 function App() {
   
-  const [gameState, setGameState] = useState(new GameState(testlevel1));
+  const [gameState, setGameState] = useState(new GameState(level1));
   const [updateNumber, setUpdateNumber] = useState(0);
 
   function updateGameState() {
@@ -60,7 +60,7 @@ const RollButton = () => {
 
   const [gameState, update] = useContext(gameContext);
   const [isDown, setDown] = useState(false);
-  const canRoll = !gameState.eventState?.rolled
+  const canRoll = gameState.eventState?.canRoll();
 
   return <div
     className={`RollButton ${isDown && canRoll ? "down" : "up"} ${canRoll ? "enabled" : "disabled"}`}
@@ -68,7 +68,7 @@ const RollButton = () => {
     onMouseUp={() => setDown(false)}
     onClick={() => {
       if (canRoll) {
-        gameState.eventState?.rollDice(0, gameState);
+        gameState.eventState?.rollDice(gameState);
         update();
       }}
     } 
@@ -76,6 +76,5 @@ const RollButton = () => {
     Roll
   </div>
 }
-
 
 export default App;

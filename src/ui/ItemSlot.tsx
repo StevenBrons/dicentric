@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import Item from "../game_logic/items/item";
 import "./ItemSlot.css";
 
-const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean }> = ({ item, placeHolder, hasMultiple = false }) => {
+const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean, canDrag?: boolean, onClick?: any }> = ({ item, placeHolder, hasMultiple = false, canDrag = true, onClick = null }) => {
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: "item",
@@ -20,13 +20,15 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 		</div>
 	}
 
-	return <div className="ItemSlot Selectable">
+	return <div className={`ItemSlot ${canDrag ? "dragable" : ""} ${onClick ? "clickable" : ""}`}>
 		<div
+			draggable={canDrag ? "true" : "false"}
 			className="Item"
 			data-tip="React-tooltip"
 			style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}}
-			ref={dragRef}
-			/>
+			ref={canDrag ? dragRef : null}
+			onClick={onClick ? onClick : () => {}}
+		/>
 	</div>
 
 }

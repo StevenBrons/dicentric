@@ -16,8 +16,11 @@ const ActionBar : FC<Props> = ({ index }) => {
 	const action = event.actions[index] as GameAction;
 	const selectedDice = event.selectedDice[index];
 
+	const canUse = !event.rolled && (event.selectedOption === index || event.selectedOption === -1);
+	const hasActivated = event.rolled && event.lastSelectedOption === index;
+
 	const [{ isOver }, dropRef] = useDrop({
-		accept: "item",
+		accept: canUse ? "item" : "none",
 		drop: (item) => {event.selectDice(item as Dice, index, gameState); update()},
 		collect: (monitor) => ({
 			isOver: monitor.isOver()
@@ -27,22 +30,35 @@ const ActionBar : FC<Props> = ({ index }) => {
 	let c = 0;
 	let slots = [];
 	for (let i = 0; i < action.nrDiceSlots; i++) {
-		if (c < selectedDice.length) {
-			slots[i] = <ItemSlot key={i} item={selectedDice[c]}/>;
+		if (hasActivated) {
+			if (c < event.rollResult.length) {
+				slots[i] = <div className="ItemSlot">
+					<div className="Result">
+						{event.rollResult[i]}
+					</div>
+				</div>;
+			} else {
+				slots[i] = <ItemSlot key={i} item={null}/>;
+			}
 		} else {
-			slots[i] = <ItemSlot key={i} item={null}/>;
+			if (c < selectedDice.length) {
+				slots[i] = <ItemSlot key={i} item={selectedDice[c]}/>;
+			} else {
+				slots[i] = <ItemSlot key={i} item={null}/>;
+			}
 		}
 		c++;
 	}
 
-	return <div className="ActionBar" ref={dropRef}>
+	return <div className={`ActionBar ${canUse ? "enabled" : "disabled"}`} ref={dropRef}>
 		<div className="text">
 			{action.text}
 		</div>
 		<div className="ItemGroup">
-			<div className="inner">
-				{slots}
-			</div>
+			{slots}
+		</div>
+		<div className="Sum">
+			{hasActivated && `= ${event.rollResultSum}`}
 		</div>
 	</div>
 }
