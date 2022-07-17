@@ -44,7 +44,7 @@ let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any
 //construct nodes
 let node7 = new MapNode([],439,80,5,bossbattle,true,"island_boss");
 let node6 = new MapNode([node7],352,80,4,equipmentDialogue,true,"island_event");
-let node5 = new MapNode([node6],233,128,3,battle1,true,"island_enemy_bird");
+let node5 = new MapNode([node6],243,134,3,battle1,true,"island_enemy_bird");
 let node4 = new MapNode([node6],288,32,3,battle2,true,"island_enemy_cube");
 let node3 = new MapNode([node4, node5],224,80,2,junctionDialogue,true,"island_event");
 let node2 = new MapNode([node3],144,80,1,shop,true,"island_shop");

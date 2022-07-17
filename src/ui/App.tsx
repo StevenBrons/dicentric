@@ -45,8 +45,9 @@ function App() {
       <gameContext.Provider value={[gameState, updateGameState, updateNumber]}>
         <MapLayer />
         <div className="MenuLayer">
-          {getScreen(gameState.eventState)}
-          {/* <Inventory /> */}
+          <div className={`Screen ${gameState.eventState ? gameState.eventState.name : "hidden"}`}>
+            {getScreen(gameState.eventState)}
+          </div>
           <Tray />
           { gameState.eventState ? <RollButton /> : <div />}
         </div>

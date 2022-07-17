@@ -9,9 +9,21 @@
 	overflow-y: none;
 	transition-duration: 40ms;
 	transition-timing-function: ease-out;
-	background-image: url("../../public/res/slot_inventory.png");
 	background-size: cover;
 	image-rendering: pixelated;
+}
+
+.ItemSlot.inventory {
+	background-image: url("../../public/res/slot_inventory.png");
+}
+.ItemSlot.shop {
+	background-image: url("../../public/res/slot_screen.png");
+}
+.ItemSlot.tray {
+	background-image: url("../../public/res/slot_inventory.png");
+}
+.ItemSlot.dialogue {
+	background-image: url("../../public/res/slot_screen.png");
 }
 
 .ItemSlot.dragable:hover  {

@@ -14,7 +14,7 @@ const Screen : FC<Props> = ({name, children}) => {
 	const [gameState] = useContext(gameContext);
 	const event = gameState.eventState as GameEvent;
 
-	return <div className={`Screen ${name}`}>
+	return <>
 		<h1>
 			{name}
 		</h1>
@@ -22,9 +22,11 @@ const Screen : FC<Props> = ({name, children}) => {
 			{event.description}
 		</div>
 		{children}
-		{event.actions.map((a, i) => <ActionBar index={i} key={i} />)}
+		<div>
+			{event.actions.map((a, i) => <ActionBar index={i} key={i} />)}
+		</div>
 		{ gameState.eventState?.closable ? <CloseButton /> : <div />}
-	</div>
+	</>
 }
 
 const CloseButton = () => {
