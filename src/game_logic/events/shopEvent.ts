@@ -19,8 +19,8 @@ class ShopEvent extends GameEvent {
         this.stock = stock;
     }
 
-    rollDice(gameState : GameState): void {
-        super.rollDice(gameState);
+    pressButton(gameState : GameState): void {
+        super.pressButton(gameState);
     }
 
     buy(index: number, gameState: GameState):void {

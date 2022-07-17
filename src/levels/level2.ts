@@ -15,7 +15,7 @@ let shop1 = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
 	, {item: new Dice(DICE.d8), price: 4, sold: false}
 	, {item: new Dice(DICE.d10), price: 4, sold: false}
 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
-shop1.description = "Welcome to the shop! " 
+shop1.description = "Welcome to the shop! I sell some equip";
 
 //construct enemies
 let bird = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");
@@ -47,7 +47,7 @@ let node6 = new MapNode([node7],352,80,4,equipmentDialogue,true,"island_event");
 let node5 = new MapNode([node6],233,128,3,battle1,true,"island_enemy_bird");
 let node4 = new MapNode([node6],288,32,3,battle2,true,"island_enemy_cube");
 let node3 = new MapNode([node4, node5],224,80,2,junctionDialogue,true,"island_event");
-let node2 = new MapNode([node3],144,80,1,shop,true,"island_shop");
+let node2 = new MapNode([node3],144,80,1,shop1,true,"island_shop");
 let node1 = new MapNode([node2],64,80,0,tutorialDialogue,true,"island_event");
 
 //construct map
