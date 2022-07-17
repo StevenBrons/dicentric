@@ -31,7 +31,7 @@ abstract class GameEvent {
         }
     }
 
-    rollDice(gameState : GameState) {
+    pressButton(gameState : GameState) {
         if(this.rolled) {
             //already rolled
             return;

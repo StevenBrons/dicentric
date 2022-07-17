@@ -22,7 +22,7 @@ class GameState {
 		this.inventory = level.startInventory; 
 		this.inventoryStartLevel = level.startInventory;
 		this.level = level.number;
-		this.lives = 20; //start levens??
+		this.lives = 200; //start levens??
 		this.equipment = new EquipState();
 		this.eventState = level.map.startNode.event;
 	}

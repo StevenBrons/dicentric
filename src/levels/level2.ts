@@ -15,7 +15,7 @@ let shop1 = new ShopEvent([{item: new Dice(DICE.d4), price: 2, sold: false}
 	, {item: new Dice(DICE.d8), price: 4, sold: false}
 	, {item: new Dice(DICE.d10), price: 4, sold: false}
 	, {item: new Dice(DICE.d12), price: 5, sold: false}]);
-shop1.description = "Welcome to the shop! " 
+shop1.description = "Welcome to the shop! I sell some equip";
 
 //construct enemies
 let bird = new Enemy(20, "", [new Dice(DICE.d4), new Dice(DICE.d4)], [new Dice(DICE.d6), new Dice(DICE.d8), new Dice(DICE.d10), new Dice(DICE.d10), new Dice(DICE.d12)], "Congratulations! You defeated the enemy! You got some dice as reward.");

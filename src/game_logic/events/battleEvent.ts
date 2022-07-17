@@ -31,12 +31,13 @@ class BattleEvent extends GameEvent {
 		}
 	}
 
-	rollDice(gameState : GameState): void {
-		super.rollDice(gameState);
-		//next turn you can roll again
-		this.rolled = false;
+	pressButton(gameState : GameState): void {
+		if(this.canGoToNextRound()) {
+			this.nextRound();
+			return;
+		}
+		super.pressButton(gameState);
 		let yourRoll = this.rollResult[this.lastSelectedOption];
-		this.rollResult[this.lastSelectedOption] = 0;
 		//nu enemy actie 
 		let enemyAttack = this.enemy.attack();
 
@@ -49,6 +50,15 @@ class BattleEvent extends GameEvent {
 			this.description = this.enemy.textUponDefeat;
 			this.closable = true;
 		}
+	}
+
+	nextRound() : void {
+		this.rolled = false;
+		this.rollResult[this.lastSelectedOption] = 0;
+	}
+
+	canGoToNextRound() {
+		return this.rolled;
 	}
 
 	eventEnded() : boolean {
