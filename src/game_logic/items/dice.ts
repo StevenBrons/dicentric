@@ -11,6 +11,7 @@ export enum DICE {
 }
 
 class Dice extends Item {
+	image: string;
 	description: string;
 	type: DICE;
 
@@ -24,17 +25,17 @@ class Dice extends Item {
 	static getImage(d: DICE) {
 		switch(d) {
 			case DICE.d4: 
-				return "./res/d4.png";
+				return "d4";
 			case DICE.d6: 
-				return "./res/d6.png";
+				return "d6";
 			case DICE.d8: 
-				return "./res/d8.png";
+				return "d8";
 			case DICE.d10: 
-				return "./res/d10.png";
+				return "d10";
 			case DICE.d12: 
-				return "./res/d12.png";
+				return "d12";
 			case DICE.d20: 
-				return "./res/d20.png";
+				return "d20";
 		} 
 	}
 
