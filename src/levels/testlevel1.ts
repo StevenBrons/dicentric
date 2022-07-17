@@ -3,7 +3,6 @@ import Level from "../game_logic/level"
 import Dice, { DICE } from "../game_logic/items/dice";
 import MapNode from "../game_logic/mapNode";
 import ShopEvent from "../game_logic/events/shopEvent";
-import Equipment from "../game_logic/items/equipment";
 import PlusOne from "../game_logic/items/equipment/plusOne";
 
 //construct shops

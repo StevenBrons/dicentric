@@ -34,6 +34,7 @@ abstract class GameEvent {
             //already rolled
             return;
         }
+        this.nrOfDiceSelected = 0;
         this.rolled = true;
         this.rollResult = this.selectedDice[this.selectedOption].map(d => d.roll(gameState.equipment.getDiceEquipment(d.type)));
         this.rollResultSum = this.rollResult.reduce((accumulator, current) => {
@@ -85,7 +86,7 @@ abstract class GameEvent {
     }
 
     canRoll() : boolean {
-        return this.nrOfDiceSelected > 0;
+        return this.nrOfDiceSelected > 0 && !this.rolled;
     }
 }
 
