@@ -16,7 +16,7 @@ const Screen : FC<Props> = ({name, children}) => {
 
 	return <div className={`Screen ${name}`}>
 		<h1>
-			Shop
+			{name}
 		</h1>
 		<div>
 			{event.description}
