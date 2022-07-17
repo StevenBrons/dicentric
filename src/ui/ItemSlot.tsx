@@ -28,7 +28,7 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 				draggable={canDrag ? "true" : "false"}
 				className="Item"
 				data-tip="React-tooltip"
-				style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url('${item.image}')`}}
+				style={{ backgroundImage: isDragging && !hasMultiple ? "" : `url(./res/items/"${item.image}.png")`}}
 				ref={canDrag ? dragRef : null}
 				onClick={onClick ? onClick : () => {}}
 			/>
