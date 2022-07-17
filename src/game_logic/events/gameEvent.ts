@@ -17,6 +17,7 @@ abstract class GameEvent {
     rollResultSum: number;
     rolled : boolean;
     selectedOption : number = -1;
+    nrOfDiceSelected : number = 0;
 
     constructor(nrOptions: number) {
         this.nrOptions = nrOptions;
@@ -51,11 +52,15 @@ abstract class GameEvent {
         if(!gameState.inventory.includes(d)) {
 			throw new Error("trying to select dice which is not in inventory");
 		}
+        if(this.selectedOption !== -1 && this.selectedOption !== option) {
+            return;
+        }
         //remove from inventory and select
         this.selectedOption = option;
         let i = gameState.inventory.indexOf(d);
 		gameState.inventory.splice(i, 1);
         this.selectedDice[option].push(d);
+        this.nrOfDiceSelected++;
     }
 
     deselectDice(d: Dice, gameState: GameState) {
@@ -73,6 +78,14 @@ abstract class GameEvent {
         let i = this.selectedDice[selected].indexOf(d);
 		this.selectedDice[selected].splice(i, 1);
         gameState.inventory.push(d);
+        this.nrOfDiceSelected--;
+        if(this.nrOfDiceSelected === 0) {
+            this.selectedOption = -1;
+        }
+    }
+
+    canRoll() : boolean {
+        return this.nrOfDiceSelected > 0;
     }
 }
 
