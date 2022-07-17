@@ -36,7 +36,7 @@ let shopboss2 = new ShopEvent([{item: new PlusOne(), price: 4, sold: false}
 shopboss2.description = "The creature up ahead is very hard so better prepare."
 
 //construct boss
-let boss = new Enemy(100, "", [d20()], [], "Congratulations, you beat the game!\n Thanks for playing!");
+let boss = new Enemy(50, "boss", [d20()], [], "Congratulations, you beat the game!\n Thanks for playing!");
 
 //construct battles
 let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
