@@ -135,17 +135,24 @@ class GameState {
 		if(this.eventState === null) {
 			return "Equip"
 		}
+		if(this.inventory.filter(item => (item instanceof Dice)).length === 0 && !this.eventState?.closable) {
+			return "Restart";
+		}
 		return this.eventState.buttonText;
 	}
 
 	canPress() : boolean {
-		if(this.eventState === null) {
+		if(this.eventState === null || this.getButtonText() === "Restart") {
 			return true;
 		}
 		return this.eventState.canPress();
 	}
 
 	pressButton() : void {
+		if(this.getButtonText() === "Restart") {
+			this.resetLevel();
+			return;
+		}
 		if(this.eventState === null) {
 			if(this.levelCompleted()) {
 				this.updateLevel();
