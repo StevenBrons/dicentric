@@ -1,12 +1,13 @@
 import { DICE } from "../dice";
 import Equipment from "../equipment";
 
-class ExcludeOne extends Equipment {
+class OnlyEven extends Equipment {
     description: string = "Prevents the die from rolling 1";        
 
     rollWithEq(d: DICE): number {
-        return Math.floor(Math.random() * (d - 1) + 2);
+        let roll = Math.floor(Math.random() * (d - 1) + 1);
+        return roll;
     }
 }
 
-export default ExcludeOne;
+export default OnlyEven;

@@ -42,16 +42,16 @@ let equipmentDialogue = new DialogueEvent([{text : "Pick up the object. Roll any
 
 
 //construct nodes
-let node7 = new MapNode([],439,80,5,bossbattle,true);
-let node6 = new MapNode([],352,80,4,equipmentDialogue,true);
-let node5 = new MapNode([],233,128,3,battle1,true);
-let node4 = new MapNode([],288,32,3,battle2,true);
-let node3 = new MapNode([],224,80,2,junctionDialogue,true);
-let node2 = new MapNode([],144,80,1,shop,true);
-let node1 = new MapNode([],64,80,0,tutorialDialogue,true);
+let node7 = new MapNode([],439,80,5,bossbattle,true,"");
+let node6 = new MapNode([],352,80,4,equipmentDialogue,true,"");
+let node5 = new MapNode([],233,128,3,battle1,true,"");
+let node4 = new MapNode([],288,32,3,battle2,true,"");
+let node3 = new MapNode([],224,80,2,junctionDialogue,true,"");
+let node2 = new MapNode([],144,80,1,shop,true,"");
+let node1 = new MapNode([],64,80,0,tutorialDialogue,true,"");
 
 //construct map
-let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "../public/res/level_1_map.png"); //idk of path naar image klopt
+let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "../public/res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
 
 //construct level
 let level1 = new Level(1, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);

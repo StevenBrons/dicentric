@@ -77,6 +77,14 @@ class GameState {
 	}
 
 	endEvent() : void {
+		if(this.eventState === null) { 
+			return;
+		}
+		if(this.eventState.lastSelectedOption !== -1) {
+			for(let i = 0; i< this.eventState.selectedDice[this.eventState.lastSelectedOption].length; i++) {
+				this.inventory.push(this.eventState.selectedDice[this.eventState.lastSelectedOption][i]);
+			}
+		}
 		this.eventState = null;
 	}
 

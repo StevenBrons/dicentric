@@ -8,8 +8,9 @@ class MapState {
     map : MapNode[];
     eventPool : (GameEvent|null)[];
     image : string;
+    mapSize : {width : number, height : number};
 
-    constructor(map : MapNode[], eventPool : (GameEvent|null)[], image : string) {
+    constructor(map : MapNode[], eventPool : (GameEvent|null)[], image : string, mapSize : {width : number, height : number}) {
         if(map.length === 0) {
             throw Error("trying to construct MapState with empty map")
         } 
@@ -20,6 +21,7 @@ class MapState {
         this.randomizeMap();
         this.location = this.startNode;
         this.image = image;
+        this.mapSize = mapSize;
     }
 
     setLocation(node: MapNode) : void {
