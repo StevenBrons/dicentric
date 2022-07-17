@@ -22,7 +22,7 @@ const Screen : FC<Props> = ({name, children}) => {
 			{event.description}
 		</div>
 		{children}
-		<div>
+		<div className="Actions">
 			{event.actions.map((a, i) => <ActionBar index={i} key={i} />)}
 		</div>
 		{ gameState.eventState?.closable ? <CloseButton /> : <div />}
