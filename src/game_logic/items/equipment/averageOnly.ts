@@ -5,7 +5,7 @@ class AverageOnly extends Equipment {
     description: string = "Only roll the middle two numbers of the die.";        
 
     rollWithEq(d: DICE): number {
-        if(Math.random() > 0.5) {
+        if(Math.random() < 0.5) {
             return Math.floor(d/2);
         }
         return Math.ceil(d/2);

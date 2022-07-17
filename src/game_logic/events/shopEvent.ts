@@ -15,7 +15,7 @@ class ShopEvent extends GameEvent {
         super(1); 
         this.selectedDice = [[]];
         this.name = "Shop";
-        this.actions = [{nrDiceSlots : 3, text : "add cash"}];
+        this.actions = [{nrDiceSlots : 3, text : "Add cash"}];
         this.stock = stock;
     }
 

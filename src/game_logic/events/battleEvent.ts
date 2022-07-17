@@ -34,8 +34,10 @@ class BattleEvent extends GameEvent {
 	pressButton(gameState : GameState): void {
 		if(this.canGoToNextRound()) {
 			this.nextRound();
+			this.buttonText = "Roll!";
 			return;
 		}
+		this.buttonText = "Next"
 		super.pressButton(gameState);
 		let yourRoll = this.rollResult[this.lastSelectedOption];
 		//nu enemy actie 
@@ -50,6 +52,13 @@ class BattleEvent extends GameEvent {
 			this.description = this.enemy.textUponDefeat;
 			this.closable = true;
 		}
+	}
+
+	canPress() : boolean {
+		if(this.canGoToNextRound()) {
+			return true;
+		}
+		return super.canPress();
 	}
 
 	nextRound() : void {

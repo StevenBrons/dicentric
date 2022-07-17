@@ -12,6 +12,7 @@ abstract class GameEvent {
     abstract description : string;
     abstract selectedDice : Dice[][];
     abstract actions : GameAction[];
+    buttonText : string = "Roll!";
     nrOptions : number; 
     rollResult: number[];
     rollResultSum: number;
@@ -90,7 +91,7 @@ abstract class GameEvent {
         }
     }
 
-    canRoll() : boolean {
+    canPress() : boolean {
         return this.nrOfDiceSelected > 0 && !this.rolled;
     }
 }

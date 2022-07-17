@@ -62,6 +62,9 @@ class GameState {
 	}
 
 	move(node : MapNode) : void {
+		if(this.eventState != null) {
+			return;
+		}
 		this.mapState.setLocation(node);
 		if(node.event != null) {
 			this.setEvent(node.event);
