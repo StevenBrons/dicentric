@@ -26,9 +26,9 @@ let cube = new Enemy(15, "cube", [new Dice(DICE.d4), new Dice(DICE.d6)], [new Di
 let boss = new Enemy(50, "boss", [new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d8)], [new OnlyEven()], "Congratulations! You defeated the boss and completed the tutorial level. You got a new equipment!");
 
 //construct battles
-let battle1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird); 
-let battle2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube);
-let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
+let battle1 = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird); 
+let battle2 = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube);
+let bossbattle = new BattleEvent([{text : "Attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "Defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
 
 //construct dialogue events
 let tutorialDialogue = new DialogueEvent([{text : "Search thoroughly, roll higher than 4 to succeed", slots : 2, effect : {succes: (n: number)=>{return n>4?{succes : true, text : "You found some dice! \n d4 was added to your inventory. \n d4 was added to your inventory. \n d6 was added to you inventory."}:{succes : false, text : "You didn't find anything."}}, rewards: [new Dice(DICE.d6), new Dice(DICE.d4), new Dice(DICE.d4)]}}

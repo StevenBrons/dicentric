@@ -22,21 +22,8 @@
 // let shopboss1 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
 // let shopboss2 = new ShopEvent([{item: new Dice(DICE.d12), price: 5, sold: false}]);
 
-// //construct battles
-// let bird1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
-// let bird2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
-// let bird3 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
-// let bird4 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructBird());
-// let cube1 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
-// let cube2 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
-// let cube3 = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], constructCube());
-// let ninja1 = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], constructNinja());
-// let ninja2 = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], constructNinja());
-// let ninja3 = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], constructNinja());
-
-
-// //construct boss
-// let boss = new Enemy(100, "", [d20()], [], "Congratulations!");
+//construct boss
+let boss = new Enemy(100, "", [d20()], [], "Congratulations!");
 
 // //construct battles
 // let bossbattle = new BattleEvent([{text : "attack the amount rolled", slots: 2, effect: BATTLE_ACTION.attack}, {text : "defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], boss);
@@ -59,35 +46,40 @@
 // 	, "There seems to be a menacing creature up ahead. On the ground lays a shiny object. Will it help you in your fight against the creature?");
 
 
-// let eventPool = [bird1, bird2, bird3, bird4, cube1, cube2, cube3, ninja1, ninja2, ninja3, Dialogue1, Dialogue2, Dialogue3, Dialogue4, null, null, null, null, null];
+//construct eventpool and battles
+let eventPool = [constructBirdEvent(), constructBirdEvent(), constructBirdEvent(), constructBirdEvent()
+	, constructCubeEvent(), constructCubeEvent(), constructCubeEvent()
+	, constructNinjaEvent(), constructNinjaEvent(), constructNinjaEvent()
+	, {event: Dialogue1, image: "island_event"}, {event: Dialogue2, image: "island_event"}, {event: Dialogue3, image: "island_event"}, {event: Dialogue4, image: "island_event"}
+	, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}, {event: null, image: ""}];
 
-// //construct nodes
-// //TODO coordinaten
-// let node17 = new MapNode([],0,0,7,bossbattle,true,"");
-// let node16 = new MapNode([],0,0,6,shopboss1,true,"");
-// let node15 = new MapNode([],0,0,6,shopboss2,true,"");
-// let node14 = new MapNode([],0,0,5,null,false,"");
-// let node13= new MapNode([],0,0,5,null,false,"");
-// let node12 = new MapNode([],0,0,4,null,false,"");
-// let node11 = new MapNode([],0,0,4,null,false,"");
-// let node10 = new MapNode([],0,0,5,null,false,"");
-// let node9 = new MapNode([],0,0,4,null,false,"");
-// let node8 = new MapNode([],0,0,3,null,false,"");
-// let node7 = new MapNode([],0,0,3,null,false,"");
-// let node6 = new MapNode([],0,0,3,null,false,"");
-// let node5 = new MapNode([],0,0,3,null,false,"");
-// let node4 = new MapNode([],0,0,2,null,false,"");
-// let node3 = new MapNode([],0,0,2,null,false,"");
-// let node2 = new MapNode([node3, node4],0,0,1,shopstart,false,"");
-// let node1 = new MapNode([node2],0,0,0,DialogueStart,true,"");
+//construct nodes
+let node17 = new MapNode([],568,167,7,bossbattle,true,"island_boss");
+let node16 = new MapNode([node17],488,120,6,shopboss1,true,"island_shop");
+let node15 = new MapNode([node17],488,199,6,shopboss2,true,"island_shop");
+let node14 = new MapNode([node16],416,138,5,null,false,"");
+let node13= new MapNode([node15],416,234,5,null,false,"");
+let node12 = new MapNode([node13],352,266,4,null,false,"");
+let node11 = new MapNode([node14],352,170,4,null,false,"");
+let node10 = new MapNode([node16],416,90,5,null,false,"");
+let node9 = new MapNode([node10],352,74,4,null,false,"");
+let node8 = new MapNode([node12],288,266,3,null,false,"");
+let node7 = new MapNode([node11],288,202,3,null,false,"");
+let node6 = new MapNode([node11],228,137,3,null,false,"");
+let node5 = new MapNode([node9],228,74,3,null,false,"");
+let node4 = new MapNode([node7, node8],224,233,2,null,false,"");
+let node3 = new MapNode([node5, node6],224,104,2,null,false,"");
+let node2 = new MapNode([node3, node4],184,169,1,shopstart,false,"island_shop");
+let node1 = new MapNode([node2],96,169,0,DialogueStart,true,"island_event");
 
-// // //construct map
-// // let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "./res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
+//construct map
+//TODO width height?
+let map = new MapState([node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17], eventPool, "", {width : 640, height : 180}); 
 
-// // //construct level
-// // let level2 = new Level(2, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
+//construct level
+let level2 = new Level(2, map, [d4(), d4(), d4(), d4(), d4(), d6(), d6(), d6(), d8(), d8(), d8(), d10(), d12()]);
 
-// //export default level2;
+export default level2;
 
 // function d4() : Dice {
 // 	return new Dice(DICE.d4);
@@ -113,24 +105,21 @@
 // 	return new Dice(DICE.d20);
 // }
 
-// function constructBirdEvent() {
-// 	let bird = new Enemy(10, "", [d4(), d4()], [d6(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
-// 	let event = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird);
-// 	return {event: event, image: "island_enemy_bird"}
-// }
+function constructBirdEvent() {
+	let bird = new Enemy(10, "", [d4(), d4()], [d6(), d8(), d10(), d10(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 1, d10 x 2, d12 x 1)");
+	let event = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], bird);
+	return {event: event, image: "island_enemy_bird"}
+}
 
-// function constructCubeEvent() {
-// 	let cube = new Enemy(15, "", [d4(), d6()], [d6(), d8(), d8(), d10(), d12(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
-// 	let event = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube);
-// 	return {event: event, image: "island_enemy_cube"}
-// }
+function constructCubeEvent() {
+	let cube = new Enemy(15, "", [d4(), d6()], [d6(), d8(), d8(), d10(), d12(), d12()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d6 x 2, d8 x 2, d10 x 3, d12 x 1)");
+	let event = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], cube);
+	return {event: event, image: "island_enemy_cube"}
+}
 
-// function constructNinjaEvent() {
-// 	let ninja = new Enemy(25, "", [d4(), d4(), d4(), d4()], [d4(), d4(), d4(), d4(), d6(), d8(), d10(), d10(), d20()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d4 x 4, d6 x 2, d8 x 1, d10 x 2, d20 x 1)");
-// 	let event = new BattleEvent([{text : "attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}], ninja);
-// 	return {event: event, image: ""}
-// }
-
-const level2 = {}
-
-export default level2;
+//TODO ninja image
+function constructNinjaEvent() {
+	let ninja = new Enemy(25, "", [d4(), d4(), d4(), d4()], [d4(), d4(), d4(), d4(), d6(), d8(), d10(), d10(), d20()], "Congratulations! You defeated the enemy! You got some dice as reward. \n (d4 x 4, d6 x 2, d8 x 1, d10 x 2, d20 x 1)");
+	let event = new BattleEvent([{text : "Attack the amount rolled", slots: 1, effect: BATTLE_ACTION.attack}, {text : "Defend, heal the amount rolled more than the enemies' roll", slots: 3, effect: BATTLE_ACTION.defend}], ninja);
+	return {event: event, image: ""}
+}
