@@ -29,12 +29,13 @@ const Tray: React.FC = () => {
 			item={diceGroups[d]?.length > 0 ? diceGroups[d][0] : null} 
 			placeHolder={Dice.getImage(d)}
 			key={d}
+			slotType="tray"
 		/>);
 
 	
 
 	const diceAmounts = diceList.map(i => <span key={i}>x{diceGroups[i]?.length || 0}</span>);
-	const equipments  = diceList.map(i => <ItemSlot item={gameState.equipment.getDiceEquipment(i)} key={i} />);
+	const equipments  = diceList.map(i => <ItemSlot item={gameState.equipment.getDiceEquipment(i)} key={i} slotType="tray" />);
 	
 	return <div className={`Tray ${isOver ? "Glow" : ""}`} ref={dropRef}>
 		{diceSlots}

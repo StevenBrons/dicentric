@@ -4,26 +4,36 @@
 	grid-row-end: event_c1;
 	grid-column-start: event_c1;
 	grid-column-end: event_c2;
-	padding: 20px;
+	padding: 45px;
 	pointer-events: all;
 	display: grid;
-	grid-template-rows: 10% auto auto;
+	grid-template-rows: 15% auto min-content;
 	grid-template-columns: 1fr;
 	align-items: stretch;
+	justify-content: space-between;
 	background-image: url("../../../public/res/dialogue_box.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   image-rendering: pixelated;
+	transition-delay: 1.5s;
+	transition-duration: 1s;
+}
+
+.Screen.hidden {
+	transform: translateY(100vh);
+	transition-delay: 0s;
+}
+
+.Screen h1 {
+	margin-bottom: 20px;
 }
 
 .ActionBar {
 	width: 100%;
-	height: auto;
+	height: 100px;
 	display: grid;
-	padding: 20px;
 	grid-template-columns: 1fr 40% 150px;
 	grid-template-rows: 1fr;
-	background-color: orange;
 }
 
 .ActionBar .Sum {
@@ -32,7 +42,11 @@
 	font-size: 30px;
 }
 
-.ActionBar:hover {
+.ActionBar.disabled {
+	filter: opacity(20%);
+}
+
+.ActionBar.enabled:hover {
 	filter: brightness(120%);
 }
 
@@ -50,4 +64,31 @@
 	gap: 30px;
 	display: flex;
 	align-items: center;
+}
+
+.CloseButton {
+	width: 60px;
+	height: 60px;
+	top: 30px;
+	right: 35px;
+  cursor: pointer;
+  grid-area: event_c2;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+  transition-duration: 40ms;
+	transition-timing-function: ease-out;
+}
+
+.CloseButton.down {
+  filter: brightness(80%);
+}
+
+.CloseButton.up {
+  background-image: url("../../../public/res/cross.png");
+}
+
+.CloseButton:hover {
+  filter: brightness(60%);
 }

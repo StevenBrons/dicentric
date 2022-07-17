@@ -24,9 +24,9 @@ const Inventory = () => {
 	let slots = [];
 	for (let i = 0; i < SIZE; i++) {
 		if (c < items.length) {
-			slots[i] = <ItemSlot key={i} item={items[c]}/>;
+			slots[i] = <ItemSlot key={i} item={items[c]} slotType="inventory"/>;
 		} else {
-			slots[i] = <ItemSlot key={i} item={null}/>;
+			slots[i] = <ItemSlot key={i} item={null} slotType="inventory"/>;
 		}
 		c++;
 	}

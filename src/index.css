@@ -97,33 +97,6 @@ html, body {
   filter: brightness(120%);
 }
 
-.CloseButton {
-	width: 60px;
-	height: 60px;
-	top: 25px;
-	right: 25px;
-  cursor: pointer;
-  grid-area: event_c2;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  image-rendering: pixelated;
-  transition-duration: 40ms;
-	transition-timing-function: ease-out;
-}
-
-.CloseButton.down {
-  filter: brightness(80%);
-}
-
-.CloseButton.up {
-  background-image: url("../public/res/cross.png");
-}
-
-.CloseButton:hover {
-  filter: brightness(60%);
-}
-
 .RollButton {
   grid-area: roll;
   text-align: center;

@@ -21,18 +21,19 @@ type NodeProps = {
 }
 
 const Node : FC<NodeProps> = ({pos: {x, y}, pixelSize, onClick, canTravel, image}) => {
-	return <div
+	return <img
 		className={`Node ${canTravel ? "CanTravel" : ""}`}
 		style={{
 			left: `${x * pixelSize}px`, 
 			top: `${y * pixelSize}px`, 
-			// backgroundSize: `${}`
-			// backgroundImage: `url(${image})`, 
+			width: `${50*pixelSize}px`,
+			height: `${50*pixelSize}px`,
 		}}
+		src={`./res/islands/${image}.png`}
 		onClick={canTravel ? onClick : () => {}}
 	
 	>
-	</div>
+	</img>
 }
 
 const MapLayer = () => {
@@ -50,7 +51,7 @@ const MapLayer = () => {
 			onClick={() => { gameState.move(node); update()}}
 			pixelSize={pixelSize}
 			canTravel={location.nodesInFront.includes(node)}
-			image=""
+			image={node.image}
 		/>
 	);
 

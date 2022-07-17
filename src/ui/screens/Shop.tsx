@@ -20,6 +20,7 @@ const Shop : FC<Props> = ({ shopEvent }) => {
 			placeHolder={item.item.image}
 			canDrag={false}
 			onClick={() => {shopEvent.buy(i, gameState); update()}}
+			slotType="shop"
 		/>
 		<span>
 			{item.price}

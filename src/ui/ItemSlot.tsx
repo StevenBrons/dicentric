@@ -3,7 +3,9 @@ import { useDrag, useDrop } from "react-dnd";
 import Item from "../game_logic/items/item";
 import "./ItemSlot.css";
 
-const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean, canDrag?: boolean, onClick?: any }> = ({ item, placeHolder, hasMultiple = false, canDrag = true, onClick = null }) => {
+type SlotType = "inventory" | "dialogue" | "shop" | "tray";
+
+const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: boolean, canDrag?: boolean, onClick?: any, slotType: SlotType }> = ({ item, placeHolder, hasMultiple = false, canDrag = true, onClick = null, slotType }) => {
 
 	const [{ isDragging }, dragRef] = useDrag({
 		type: "item",
@@ -14,13 +16,13 @@ const ItemSlot: FC<{ item: Item | null, placeHolder?: string, hasMultiple?: bool
 	});
 
 	if (!item) {
-		return <div className="ItemSlot">
+		return <div className={`ItemSlot ${slotType}`}>
 			<div className="Item placeholder" style={{ backgroundImage: `url('${placeHolder}')`}} draggable="false"/>
 			{isDragging && "hoooi"}
 		</div>
 	}
 
-	return <div className={`ItemSlot ${canDrag ? "dragable" : ""} ${onClick ? "clickable" : ""}`}>
+	return <div className={`ItemSlot ${canDrag ? "dragable" : ""} ${onClick ? "clickable" : ""} ${slotType}`}>
 		<div
 			draggable={canDrag ? "true" : "false"}
 			className="Item"
