@@ -6,6 +6,7 @@ import GameEvent from "./events/gameEvent";
 import MapNode from "./mapNode";
 import Level from "./level";
 import Dice, { DICE } from "./items/dice";
+import InventoryEvent from "./events/inventoryEvent";
 
 
 class GameState {
@@ -13,18 +14,20 @@ class GameState {
 	inventory: Item[];
 	inventoryStartLevel: Item[];
 	level: number;
+	levels: Level[];
 	lives: number;
 	equipment: EquipState;
 	eventState: GameEvent | null;  
 
-	constructor(level: Level) {
-		this.mapState = level.map;
-		this.inventory = level.startInventory; 
-		this.inventoryStartLevel = level.startInventory;
-		this.level = level.number;
+	constructor(levels: Level[]) {
+		this.mapState = levels[0].map;
+		this.inventory = levels[0].startInventory; 
+		this.inventoryStartLevel = levels[0].startInventory;
+		this.level = 0;
+		this.levels = levels;
 		this.lives = 100; //start levens??
 		this.equipment = new EquipState();
-		this.eventState = level.map.startNode.event;
+		this.eventState = levels[0].map.startNode.event;
 	}
 
 	equipDice(eq: Equipment, d: DICE) : void {
@@ -95,13 +98,16 @@ class GameState {
 		this.inventory = this.inventory.concat(items);
 	}
 
-	updateLevel(level: Level) : void {
-		this.mapState = level.map;
-		this.level = level.number;
-		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(level.startInventory);
+	updateLevel() : void {
+		this.level++;
+		if(this.level === this.levels.length) {
+			return //game ended TODO
+		}
+		this.mapState = this.levels[this.level].map;
+		this.inventory = this.inventory.filter(item => !(item instanceof Dice)).concat(this.levels[this.level].startInventory);
 		this.inventoryStartLevel = this.inventory;
 		this.lives = 100; //of oude hoeveelheid levens???
-		this.eventState = level.map.startNode.event;
+		this.eventState = this.levels[this.level].map.startNode.event;
 	}
 
 	resetLevel() : void{
@@ -113,6 +119,35 @@ class GameState {
 
 	levelCompleted() : boolean {
 		return this.eventState === null && this.mapState.location === this.mapState.endNode;
+	}
+
+	getButtonText() : string {
+		if(this.levelCompleted()) {
+			return "Next";
+		}
+		if(this.eventState === null) {
+			return "Equip"
+		}
+		return this.eventState.buttonText;
+	}
+
+	canPress() : boolean {
+		if(this.eventState === null) {
+			return true;
+		}
+		return this.eventState.canPress();
+	}
+
+	pressButton() : void {
+		if(this.eventState === null) {
+			if(this.levelCompleted()) {
+				this.updateLevel();
+				return
+			}
+			this.eventState = new InventoryEvent();
+			return;
+		}
+		else this.eventState.pressButton(this);
 	}
 }
 
