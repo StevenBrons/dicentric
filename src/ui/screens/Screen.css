@@ -10,6 +10,10 @@
 	grid-template-rows: 10% auto auto;
 	grid-template-columns: 1fr;
 	align-items: stretch;
+	background-image: url("../../../public/res/dialogue_box.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
 }
 
 .ActionBar {
