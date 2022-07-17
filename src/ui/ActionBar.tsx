@@ -50,7 +50,7 @@ const ActionBar : FC<Props> = ({ index }) => {
 		c++;
 	}
 
-	return <div className={`ActionBar ${canUse ? "enabled" : "disabled"}`} ref={dropRef}>
+	return <div className={`ActionBar ${canUse ? "enabled" : "disabled"} ${hasActivated ? "hasActivated" : ""}`} ref={dropRef}>
 		<div className="text">
 			{action.text}
 		</div>
