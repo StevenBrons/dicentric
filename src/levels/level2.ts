@@ -54,6 +54,6 @@ let node1 = new MapNode([node2],64,80,0,tutorialDialogue,true,"island_event");
 let map = new MapState([node1, node2, node3, node4, node5, node6, node7], [], "./res/level_1_map.png", {width : 640, height : 180}); //idk of path naar image klopt
 
 //construct level
-let level1 = new Level(1, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
+let level2 = new Level(2, map, [new Dice(DICE.d4), new Dice(DICE.d4), new Dice(DICE.d6), new Dice(DICE.d6), new Dice(DICE.d8)]);
 
-export default level1;
+export default level2;
